@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.dao.UserDao;
 import com.humanbooster.services.UserService;
+import com.humanbooster.utils.Encryption;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
 		user.setApprouvedUser(false);
 		user.setAvailableUser(true);
 		user.setDeletedUser(false);
+		user.setPasswordUser(Encryption.encryption(user.getPasswordUser()));
 		if (ud.saveUser(user)) {
 			return true;
 		} else {

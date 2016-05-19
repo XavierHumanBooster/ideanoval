@@ -48,6 +48,7 @@ public class UserController {
 			session.setAttribute("idUser", user.getIdUser());
 			return connexionIndex(map);
 		} else {
+			map.put("userLambda", new UserLambda());
 			return new ModelAndView("/loginRegister", map);
 		}
 	}

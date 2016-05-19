@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.humanbooster.business.User;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.dao.UserDao;
+import com.humanbooster.utils.Encryption;
 
 @SuppressWarnings("unchecked")
 @Repository
@@ -31,18 +32,41 @@ public class UserDaoImpl implements UserDao {
 
 	// A RETOUCHER POUR FAIRE UN USER user ET FAIRE LE TRI DANS LE SERVICE ENTRE
 	// ADMIN ET USERLAMBDA
+//	@Override
+//	@Transactional(readOnly = true)
+//	public boolean connectDaoUser(UserLambda user) {
+//		try {
+//			Query query = sessionFactory.getCurrentSession()
+//					.createQuery("FROM User u WHERE u.loginUser=:mail AND u.passwordUser=:pwd");
+//			query.setString("mail", user.getLoginUser());
+//			query.setString("pwd", user.getPasswordUser());
+//			user = (UserLambda) query.uniqueResult();
+//
+//			if (user != null) {
+//				return true;
+//			} else {
+//				return false;
+//			}
+//		} catch (HibernateException ex) {
+//			ex.printStackTrace();
+//			return false;
+//		}
+//
+//	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public boolean connectDaoUser(UserLambda user) {
 		try {
 			Query query = sessionFactory.getCurrentSession()
-					.createQuery("FROM User u WHERE u.loginUser=:mail AND u.passwordUser=:pwd");
+					.createQuery("FROM User u WHERE u.loginUser=:mail");
 			query.setString("mail", user.getLoginUser());
-			query.setString("pwd", user.getPasswordUser());
-			user = (UserLambda) query.uniqueResult();
+			UserLambda userInBase = (UserLambda) query.uniqueResult();
 
-			if (user != null) {
-				return true;
+			if (userInBase != null) {
+				boolean bool = Encryption.compareEncryption(userInBase.getPasswordUser(), user.getPasswordUser());
+				
+				return bool;
 			} else {
 				return false;
 			}
