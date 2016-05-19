@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ideanoval</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+		<property name="connection.pool_size">10</property>
+
+		<property name="show_sql">true</property>
+
+		<property name="hbm2ddl.auto">update</property>
+		
+		<mapping class="com.humanbooster.business.Administrator" />
+		<mapping class="com.humanbooster.business.Answer" />
+		<mapping class="com.humanbooster.business.Category" />
+		<mapping class="com.humanbooster.business.Commentary" />
+		<mapping class="com.humanbooster.business.CommentaryAlert" />
+		<mapping class="com.humanbooster.business.EvaluableIdea" />
+		<mapping class="com.humanbooster.business.Idea" />
+		<mapping class="com.humanbooster.business.IdeaAlert" />
+		<mapping class="com.humanbooster.business.Mark" />
+		<mapping class="com.humanbooster.business.OptionPoll" />
+		<mapping class="com.humanbooster.business.Poll" />
+		<mapping class="com.humanbooster.business.User" />
+		<mapping class="com.humanbooster.business.UserLambda" />
+
+	</session-factory>
+</hibernate-configuration>
