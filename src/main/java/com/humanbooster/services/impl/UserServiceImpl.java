@@ -2,10 +2,13 @@ package com.humanbooster.services.impl;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.humanbooster.business.Administrator;
+import com.humanbooster.business.User;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.dao.UserDao;
 import com.humanbooster.services.UserService;
@@ -28,9 +31,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserLambda findUserByMail(String loginUser) {
+	public User findUserByMail(String loginUser) {
 
-		UserLambda user = ud.findUserByMail(loginUser);
+		User user = ud.findUserByMail(loginUser);
 
 		return user;
 	}
@@ -54,6 +57,21 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean connectAdmin(String login, String password) {
+		Administrator admin = new Administrator();
+		admin.setLoginUser(login);
+		admin.setPasswordUser(password);
+		boolean bool = ud.connectDaoUser(admin);
+
+		return bool;
+	}
+
+	@Override
+	public List<UserLambda> findAllNotApprouvedUser() {		
+		return ud.findUserIsNotApprouved();
 	}
 
 }

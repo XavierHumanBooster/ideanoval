@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.humanbooster.business.Administrator;
 import com.humanbooster.business.User;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.dao.UserDao;
@@ -56,20 +57,28 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public boolean connectDaoUser(UserLambda user) {
+	public boolean connectDaoUser(User user) {
 		try {
 			Query query = sessionFactory.getCurrentSession()
 					.createQuery("FROM User u WHERE u.loginUser=:mail");
 			query.setString("mail", user.getLoginUser());
-			UserLambda userInBase = (UserLambda) query.uniqueResult();
-
-			if (userInBase != null) {
-				boolean bool = Encryption.compareEncryption(userInBase.getPasswordUser(), user.getPasswordUser());
-				
-				return bool;
+			if (user.getClass() == Administrator.class) {
+				Administrator adminInBase = (Administrator) query.uniqueResult();
+				if (adminInBase != null) {
+					boolean bool = Encryption.compareEncryption(adminInBase.getPasswordUser(), user.getPasswordUser());
+					return bool;
+				} else {
+					return false;
+				}
 			} else {
-				return false;
-			}
+				UserLambda userInBase = (UserLambda) query.uniqueResult();
+				if (userInBase != null) {
+					boolean bool = Encryption.compareEncryption(userInBase.getPasswordUser(), user.getPasswordUser());	
+					return bool;
+				} else {
+					return false;
+				}
+			}	
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 			return false;
@@ -79,12 +88,12 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserLambda findUserByMail(String mail) {
+	public User findUserByMail(String mail) {
 		try {
 			String query = "from User u where u.loginUser=:mail";
 			Query hQuery = sessionFactory.getCurrentSession().createQuery(query);
 			hQuery.setString("mail", mail);
-			return (UserLambda) hQuery.uniqueResult();
+			return (User) hQuery.uniqueResult();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
@@ -170,7 +179,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public List<User> findUserIsApprouved() {
+	public List<UserLambda> findUserIsApprouved() {
 		String queryString = "FROM User u WHERE u.ApprouvedUser = TRUE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
@@ -178,7 +187,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public List<User> findUserIsNotApprouved() {
+	public List<UserLambda> findUserIsNotApprouved() {
 		String queryString = "FROM User u WHERE u.ApprouvedUser = FALSE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
@@ -186,7 +195,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public List<User> findUserIsAvailable() {
+	public List<UserLambda> findUserIsAvailable() {
 		String queryString = "FROM User u WHERE u.AvailableUser = TRUE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
@@ -194,7 +203,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public List<User> findUserIsNotAvailable() {
+	public List<UserLambda> findUserIsNotAvailable() {
 		String queryString = "FROM User u WHERE u.AvailableUser = FALSE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
@@ -202,7 +211,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public List<User> findUserIsDeleted() {
+	public List<UserLambda> findUserIsDeleted() {
 		String queryString = "FROM User u WHERE u.DeletedUser = TRUE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
@@ -210,7 +219,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public List<User> findUserIsNotDeleted() {
+	public List<UserLambda> findUserIsNotDeleted() {
 		String queryString = "FROM User u WHERE u.DeletedUser = FALSE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();

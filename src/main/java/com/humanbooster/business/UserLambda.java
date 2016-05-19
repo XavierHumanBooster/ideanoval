@@ -2,7 +2,6 @@ package com.humanbooster.business;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -15,13 +14,10 @@ public class UserLambda extends User {
 //======================
 //Attributs
 //======================
-	@Column(nullable = false)
 	private boolean ApprouvedUser;
 	
-	@Column(nullable = false)
 	private boolean AvailableUser;
 	
-	@Column(nullable = false)
 	private boolean DeletedUser;
 	
 	@OneToMany(mappedBy = "userLambda", fetch = FetchType.LAZY)
