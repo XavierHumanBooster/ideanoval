@@ -1,15 +1,18 @@
 package com.humanbooster.services.impl;
 
+import java.sql.Date;
+import java.time.Instant;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.humanbooster.business.User;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.dao.UserDao;
 import com.humanbooster.services.UserService;
+
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserDao ud;
 
@@ -27,23 +30,27 @@ public class UserServiceImpl implements UserService{
 	public UserLambda findUserByMail(String loginUser) {
 
 		UserLambda user = ud.findUserByMail(loginUser);
-	
+
 		return user;
 	}
 
 	@Override
 	public UserLambda findUserById(int idUser) {
 		UserLambda user = ud.findUserById(idUser);
-		
+
 		return user;
 	}
 
 	@Override
-	public boolean addUser(User user) {
-		if(ud.saveUser(user)){
+	public boolean addUser(UserLambda user) {
+		user.setRegisterDateUser(Date.from(Instant.now()));
+		user.setApprouvedUser(false);
+		user.setAvailableUser(true);
+		user.setDeletedUser(false);
+		if (ud.saveUser(user)) {
 			return true;
-		}else{
-		return false;
+		} else {
+			return false;
 		}
 	}
 

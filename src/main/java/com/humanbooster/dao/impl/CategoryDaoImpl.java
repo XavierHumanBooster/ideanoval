@@ -15,22 +15,22 @@ import com.humanbooster.business.Category;
 @SuppressWarnings("unchecked")
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	public CategoryDaoImpl() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public CategoryDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	@Override
-	@Transactional(readOnly=true)
-	public List<Category> getAllCategory(){
-	
+	@Transactional(readOnly = true)
+	public List<Category> getAllCategory() {
+
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("SELECT c FROM Category c");
 			return query.list();
@@ -39,53 +39,58 @@ public class CategoryDaoImpl implements CategoryDao {
 			ex.printStackTrace();
 			return null;
 		}
-		
+
 	}
 
 	@Override
+	@Transactional
 	public boolean addCategory(Category category) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().save(category);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Category findCategoryById(int idCategory) {
 		String queryString = "FROM Category c WHERE c.idCategory = :idCategory";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		query.setInteger("idCategory", idCategory);
-		return (Category)query.uniqueResult();
+		return (Category) query.uniqueResult();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Category findCategoryByLabel(String labelCategory) {
 		String queryString = "FROM Category c WHERE c.labelCategory = :labelCategory";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		query.setString("labelCategory", labelCategory);
-		return (Category)query.uniqueResult();
+		return (Category) query.uniqueResult();
 	}
 
 	@Override
+	@Transactional
 	public boolean updateCategory(Category category) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().update(category);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Override
+	@Transactional
 	public boolean deleteCategory(Category category) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().delete(category);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}

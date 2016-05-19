@@ -67,6 +67,7 @@ public class SendMail {
 		} catch (MessagingException e) {
 			System.err.println("Erreur dans le message");
 			System.err.println(e);
+			e.printStackTrace();
 			return false;
 		}
 	}

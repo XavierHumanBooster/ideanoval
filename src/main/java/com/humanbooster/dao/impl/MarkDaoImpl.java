@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.humanbooster.business.Mark;
 import com.humanbooster.dao.MarkDao;
@@ -13,39 +14,42 @@ import com.humanbooster.dao.MarkDao;
 @SuppressWarnings("unchecked")
 @Repository
 public class MarkDaoImpl implements MarkDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	public MarkDaoImpl() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public MarkDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
+	@Transactional
 	public boolean addMark(Mark mark) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().save(mark);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Mark findMarkByIdUserAndIdIdea(int idUser, int idIdea) {
 		String queryString = "FROM Mark m WHERE m.idUser = :idUser AND m.idIdea = :idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		query.setInteger("idUser", idUser);
 		query.setInteger("idIdea", idIdea);
-		return (Mark)query.uniqueResult();
+		return (Mark) query.uniqueResult();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Mark> findMarkByIdIdea(int idIdea) {
 		String queryString = "FROM Mark m WHERE m.idIdea = :idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
@@ -54,6 +58,7 @@ public class MarkDaoImpl implements MarkDao {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Mark> findMarkByIdUser(int idUser) {
 		String queryString = "FROM Mark m WHERE m.idUser = :idUser";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
@@ -62,22 +67,24 @@ public class MarkDaoImpl implements MarkDao {
 	}
 
 	@Override
+	@Transactional
 	public boolean updateMark(Mark mark) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().update(mark);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Override
+	@Transactional
 	public boolean deleteMark(Mark mark) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().delete(mark);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}

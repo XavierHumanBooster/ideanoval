@@ -14,12 +14,13 @@ import com.humanbooster.dao.AnswerDao;
 @SuppressWarnings("unchecked")
 @Repository
 public class AnswerDaoImpl implements AnswerDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public AnswerDaoImpl() {}
-	
+	public AnswerDaoImpl() {
+	}
+
 	public AnswerDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -27,17 +28,17 @@ public class AnswerDaoImpl implements AnswerDao {
 	@Override
 	@Transactional
 	public boolean addAnswer(Answer answer) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().save(answer);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public List<Answer> findAnswerByIdUser(int idUser) {
 		String queryString = "FROM Answer a WHERE a.idUser = :idUser";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
@@ -46,7 +47,7 @@ public class AnswerDaoImpl implements AnswerDao {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public List<Answer> findAnswerByIdIdea(int idIdea) {
 		String queryString = "FROM Answer a WHERE a.idIdea = :idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
@@ -55,7 +56,7 @@ public class AnswerDaoImpl implements AnswerDao {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Answer findAnswerByIdIdeaAndIdUser(int idIdea, int idUser) {
 		String queryString = "FROM Answer a WHERE a.idIdea = :idIdea AND a.idUser = :idUser";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
@@ -67,10 +68,10 @@ public class AnswerDaoImpl implements AnswerDao {
 	@Override
 	@Transactional
 	public boolean updateAnswer(Answer answer) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().update(answer);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -79,10 +80,10 @@ public class AnswerDaoImpl implements AnswerDao {
 	@Override
 	@Transactional
 	public boolean deleteAnswer(Answer answer) {
-		try{
+		try {
 			this.sessionFactory.getCurrentSession().delete(answer);
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}

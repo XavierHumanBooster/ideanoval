@@ -11,6 +11,6 @@ public interface UserService {
 
 	public UserLambda findUserById(int idUser);
 
-	public boolean addUser(User user);
+	public boolean addUser(UserLambda user);
 
 }
