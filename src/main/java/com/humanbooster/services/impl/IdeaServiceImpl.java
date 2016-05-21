@@ -1,5 +1,7 @@
 package com.humanbooster.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,12 @@ public class IdeaServiceImpl implements IdeaService {
 		Idea idea = id.findIdeaById (idIdea);
 		return idea;
 	}
+	
+	public List<Integer> getAllIdFromIdea(){
+		List<Integer> listeId = id.getAllIdFromIdea();
+		return listeId ;
+	}
+
 
 	@Override
 	public boolean addIdea(Idea idea) {

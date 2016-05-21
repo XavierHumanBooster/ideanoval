@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.humanbooster.business.EvaluableIdea;
 import com.humanbooster.business.Idea;
 import com.humanbooster.dao.IdeaDao;
 
@@ -145,6 +146,14 @@ public class IdeaDaoImpl implements IdeaDao {
 		String queryString = "FROM Idea i WHERE i.endPoll = :endPoll";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		query.setDate("endPoll", date);
+		return query.list();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Integer> getAllIdFromIdea() {
+		String queryString = "Select idIdea FROM Idea i ORDER BY idIdea";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
 

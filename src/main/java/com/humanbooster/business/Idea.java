@@ -1,5 +1,6 @@
 package com.humanbooster.business;
 
+import java.io.File;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
@@ -13,6 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,6 +39,9 @@ public abstract class Idea implements Serializable {
 	
 	@Column(nullable = false)
 	private String pictureIdea;
+	
+	@Transient
+	File ImageUp;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date publishDateIdea;
@@ -81,6 +86,7 @@ public abstract class Idea implements Serializable {
 //======================
 //Getters
 //======================
+	
 	public int getIdIdea() {
 		return idIdea;
 	}
@@ -95,6 +101,10 @@ public abstract class Idea implements Serializable {
 
 	public String getPictureIdea() {
 		return pictureIdea;
+	}
+	
+	public File getImageUp() {
+		return ImageUp;
 	}
 
 	public Date getPublishDateIdea() {
@@ -131,6 +141,10 @@ public abstract class Idea implements Serializable {
 	public void setPictureIdea(String pictureIdea) {
 		this.pictureIdea = pictureIdea;
 	}
+	
+	public void setImageUp(File imageUp) {
+		ImageUp = imageUp;
+	}
 
 	public void setPublishDateIdea(Date publishDateIdea) {
 		this.publishDateIdea = publishDateIdea;
@@ -148,6 +162,7 @@ public abstract class Idea implements Serializable {
 		this.userLambda = userLambda;
 	}
 
+
 	//======================
 	//ToString
 	//======================
@@ -155,8 +170,8 @@ public abstract class Idea implements Serializable {
 	@Override
 	public String toString() {
 		return "Idea [idIdea=" + idIdea + ", titleIdea=" + titleIdea + ", descriptionIdea=" + descriptionIdea
-				+ ", pictureIdea=" + pictureIdea + ", publishDateIdea=" + publishDateIdea + ", availableIdea="
-				+ availableIdea + ", category=" + category + ", userLambda=" + userLambda + "]";
+				+ ", pictureIdea=" + pictureIdea + ", ImageUp=" + ImageUp + ", publishDateIdea=" + publishDateIdea
+				+ ", availableIdea=" + availableIdea + ", category=" + category + ", userLambda=" + userLambda + "]";
 	}
 	
 	
