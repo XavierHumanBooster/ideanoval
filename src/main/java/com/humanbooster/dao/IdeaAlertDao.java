@@ -12,4 +12,5 @@ public interface IdeaAlertDao {
 	public List<IdeaAlert> findIdeaAlertByDate(Date date);
 	public boolean updateIdeaAlert(IdeaAlert ideaAlert);
 	public boolean deleteIdeaAlert(IdeaAlert ideaAlert);
+	public List<IdeaAlert> findAllIdeaAlert();
 }

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.humanbooster.business.Administrator;
 import com.humanbooster.business.UserLambda;
+import com.humanbooster.services.IdeaAlertService;
 import com.humanbooster.services.UserService;
 
 @Controller
@@ -25,6 +26,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private IdeaAlertService ideaAlertService;
 
 	//==================
 	//= Connexion page =
@@ -41,6 +45,7 @@ public class AdminController {
 		if (userService.connectAdmin((String) map.get("loginUser"), (String) map.get("passwordUser"))) {
 			Administrator admin = (Administrator) userService.findUserByMail((String) map.get("loginUser"));
 			session.setAttribute("idUser", admin.getIdUser());
+			session.setAttribute("pseudoUser", admin.getPseudoUser());
 			return affichageAdminPanel(map);
 		} else {
 			map.put("errorMsg", "Error during connection...");
@@ -53,11 +58,38 @@ public class AdminController {
 	//===============
 	@RequestMapping(value = "/panel", method = RequestMethod.GET)
 	public ModelAndView affichageAdminPanel(Map<String, Object> map) {
-		List<UserLambda> notApprouved = userService.findAllNotApprouvedUser(); 
+		map.put("attempApprouvedNumber", userService.findAllNotApprouvedUser().size());
+		map.put("alertsIdeaNumber", ideaAlertService.findAllIdeaAlert().size());
+		
+		return new ModelAndView("adminPanel", map);
+	}
+	
+	//======================================
+	//= Panel Admin Validation Inscription =
+	//======================================
+	@RequestMapping(value = "/validationInscription", method = RequestMethod.GET)
+	public ModelAndView affichageAdminValidationInscription(Map<String, Object> map) {
+		List<UserLambda> notApprouved = userService.findAllNotApprouvedUser();
 		map.put("attempApprouved", notApprouved);
 		map.put("attempApprouvedNumber", notApprouved.size());
 		
-		return new ModelAndView("adminPanel", map);
+		return new ModelAndView("adminValidationInscription", map);
+	}
+		
+	@RequestMapping(value= "/validationInscription", method = RequestMethod.POST)
+	public ModelAndView buttonValidationInscription(@RequestParam Map<String, Object> map) {
+		UserLambda user = userService.findUserById(Integer.parseInt((String) map.get("id")));
+		user.setApprouvedUser(true);
+		userService.updateUser(user);
+		
+		return affichageAdminValidationInscription(map);
+	}
+	
+	@RequestMapping(value = "/annulationInscription", method = RequestMethod.POST)
+	public ModelAndView buttonAnnulationInscription(@RequestParam Map<String, Object> map) {
+		userService.deleteUser(userService.findUserById(Integer.parseInt((String) map.get("id"))));
+		
+		return affichageAdminValidationInscription(map);
 	}
 	
 }

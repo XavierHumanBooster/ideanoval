@@ -70,8 +70,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserLambda> findAllNotApprouvedUser() {		
+	public List<UserLambda> findAllNotApprouvedUser() {
 		return ud.findUserIsNotApprouved();
+	}
+
+	@Override
+	public boolean updateUser(UserLambda user) {
+		if (ud.updateUser(user)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteUser(UserLambda user) {
+		if (ud.deleteUser(user)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

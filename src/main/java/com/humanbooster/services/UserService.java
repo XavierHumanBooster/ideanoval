@@ -17,6 +17,10 @@ public interface UserService {
 
 	public boolean addUser(UserLambda user);
 	
+	public boolean updateUser(UserLambda user);
+	
+	public boolean deleteUser(UserLambda user);
+	
 	public List<UserLambda> findAllNotApprouvedUser();
 
 }

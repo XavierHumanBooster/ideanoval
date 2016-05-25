@@ -90,4 +90,12 @@ public class IdeaAlertDaoImpl implements IdeaAlertDao {
 		}
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<IdeaAlert> findAllIdeaAlert() {
+		String queryString = "FROM IdeaAlert i";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		return query.list();
+	}
+
 }
