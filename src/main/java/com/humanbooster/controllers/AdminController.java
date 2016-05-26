@@ -7,13 +7,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.humanbooster.business.Administrator;
+import com.humanbooster.business.Category;
 import com.humanbooster.business.UserLambda;
+import com.humanbooster.services.CategoryService;
 import com.humanbooster.services.IdeaAlertService;
 import com.humanbooster.services.UserService;
 
@@ -26,6 +29,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	@Autowired
 	private IdeaAlertService ideaAlertService;
@@ -90,6 +96,37 @@ public class AdminController {
 		userService.deleteUser(userService.findUserById(Integer.parseInt((String) map.get("id"))));
 		
 		return affichageAdminValidationInscription(map);
+	}
+	
+	//==============================
+	//= Panel Admin Ajout Category =
+	//==============================
+	@RequestMapping(value = "/gestionCategory", method = RequestMethod.GET)
+	public ModelAndView affichageAdminGestionCategory(Map<String, Object> map) {
+		List<Category> categories = categoryService.getAllCategory();
+		map.put("categories", categories);
+		map.put("categoriesNumber", categories.size());
+		map.put("category", new Category());
+		
+		return new ModelAndView("adminAjoutCategory", map);
+	}
+	
+	@RequestMapping(value = "/gestionCategory", method = RequestMethod.POST)
+	public ModelAndView addCategory(@ModelAttribute("category") Category category, Map<String, Object> map) {
+		List<Category> categories = categoryService.getAllCategory();
+		boolean alreadyExist = false;
+		for (Category cat : categories) {
+			if (cat.getLabelCategory().equalsIgnoreCase(category.getLabelCategory().trim())) {
+				alreadyExist = true;
+				break;
+			}
+		}
+		if (alreadyExist) {
+			map.put("errorMsg", "La catégorie existe déjà");
+		} else {
+			categoryService.addCategory(category);
+		}	
+		return affichageAdminGestionCategory(map);
 	}
 	
 }

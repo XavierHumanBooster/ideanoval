@@ -25,5 +25,11 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		
 	}
+
+	@Override
+	public boolean addCategory(Category category) {
+		
+		return categoryDao.addCategory(category);
+	}
 	
 }

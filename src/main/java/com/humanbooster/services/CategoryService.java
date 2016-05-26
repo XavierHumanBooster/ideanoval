@@ -7,6 +7,8 @@ import com.humanbooster.business.Category;
 public interface CategoryService {
 	
 	public List<Category> getAllCategory();
+	
+	public boolean addCategory(Category category);
 
 
 }

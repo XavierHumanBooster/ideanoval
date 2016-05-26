@@ -12,7 +12,7 @@
 	<jsp:include page="header.jsp" />
 	<h2>Identification</h2>
 	<c:if test="${not empty errorMsg}">
-		<p>${errorMsg}
+		<p>${errorMsg}</p>
 	</c:if>
 	<form:form action="admin" modelAttribute="administrator" method="post">
 		<form:input type="text" placeholder="Login" path="loginUser"

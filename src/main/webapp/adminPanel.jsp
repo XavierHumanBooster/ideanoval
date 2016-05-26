@@ -28,5 +28,8 @@
 			<p>${alertsCommentaryNumber} commentary alert</p>
 		</c:if>
 	</div>
+	<div style="height: 50px; background-color: #AAA;">
+		<a href="admin/gestionCategory">Gestion des catégories</a>
+	</div>
 </body>
 </html>
