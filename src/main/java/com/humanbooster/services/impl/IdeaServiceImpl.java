@@ -36,4 +36,10 @@ public class IdeaServiceImpl implements IdeaService {
 		}
 	}
 
+	@Override
+	public boolean updateIdea(Idea idea) {
+		
+		return id.updateIdea(idea);
+	}
+
 }

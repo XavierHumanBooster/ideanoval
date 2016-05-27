@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.humanbooster.business.EvaluableIdea;
 import com.humanbooster.business.Idea;
 import com.humanbooster.dao.IdeaDao;
 

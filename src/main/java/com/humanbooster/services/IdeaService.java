@@ -12,4 +12,5 @@ public interface IdeaService {
 	
 	public List<Integer> getAllIdFromIdea();
 
+	public boolean updateIdea(Idea idea);
 }
