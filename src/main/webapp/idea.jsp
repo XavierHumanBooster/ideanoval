@@ -29,11 +29,14 @@
 			path="descriptionIdea" required="required" />
 		<br />
 		<br />
-		<form:select path="category">
-			<form:options items="${categoryList}" />
-		</form:select>
+		<select name="category.idCategory">
+            <option value="0" label="Selectionnez une catégorie"/>
+            <c:forEach items="${listeCategory}" var="category">
+                <option value="${category.idCategory}" label="${category.labelCategory}"/>
+            </c:forEach>
+        </select>
 		<form:input type="file" accept="image/x-png, image/gif, image/jpeg" path="imageUp" />
-		<form:input type="hidden" path="pictureIdea" />
+		<!--<form:input type="hidden" path="pictureIdea" />-->
 		<br />
 		<br />
 		<input type="submit" value="Publier">

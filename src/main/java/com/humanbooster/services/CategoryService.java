@@ -10,5 +10,7 @@ public interface CategoryService {
 	
 	public boolean addCategory(Category category);
 
+	public Category getCategorybyId(int idCategory);
+
 
 }

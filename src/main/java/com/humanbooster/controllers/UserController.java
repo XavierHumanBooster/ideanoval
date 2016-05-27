@@ -1,5 +1,6 @@
 package com.humanbooster.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.humanbooster.business.Idea;
 import com.humanbooster.business.UserLambda;
+import com.humanbooster.services.IdeaService;
 import com.humanbooster.services.UserService;
 import com.humanbooster.utils.SendMail;
 
@@ -25,16 +28,28 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private IdeaService ideaService;
 
 	// ======================
 	// Getter index page
 	// ======================
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/pageAccueil", method = RequestMethod.GET)
 	public ModelAndView connexionIndex(Map<String, Object> map) {
+		try{
 		UserLambda user = (UserLambda) userService.findUserById((int) session.getAttribute("idUser"));
 		map.put("pseudoUser", user.getPseudoUser());
-		return new ModelAndView("index", map);
+		}catch (NullPointerException e){
+			e.printStackTrace();
+		}
+		List<Idea> listeIdea = ideaService.findEnableIdea();
+		System.out.println(listeIdea.toString());
+		map.put("listeIdea", listeIdea);
+		map.put("listeSize", listeIdea.size());
+		System.out.println(listeIdea.size());
+		return new ModelAndView("pageAccueil", map);
 	}
 
 	// ======================

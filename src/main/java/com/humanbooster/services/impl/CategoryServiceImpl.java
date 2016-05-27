@@ -23,13 +23,18 @@ public class CategoryServiceImpl implements CategoryService {
 		categories = categoryDao.getAllCategory();
 		return categories;
 		
-		
 	}
 
 	@Override
 	public boolean addCategory(Category category) {
 		
 		return categoryDao.addCategory(category);
+	}
+
+	@Override
+	public Category getCategorybyId(int idCategory) {
+		return categoryDao.findCategoryById(idCategory);
+
 	}
 	
 }

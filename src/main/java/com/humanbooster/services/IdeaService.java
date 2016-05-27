@@ -12,5 +12,10 @@ public interface IdeaService {
 	
 	public List<Integer> getAllIdFromIdea();
 
+<<<<<<< HEAD
 	public boolean updateIdea(Idea idea);
+=======
+	public List<Idea> findEnableIdea();
+
+>>>>>>> origin/master
 }

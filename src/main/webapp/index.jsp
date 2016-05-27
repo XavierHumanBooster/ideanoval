@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome</title>
+<title>Page de redirection</title>
 </head>
 <body>
-<H1>page index du site</H1>
-
-<a href="register">Page d'inscription</a>
-<br/><br/>
-<a href="publish">Ajout d'une idée</a>
-
+<jsp:forward page="/pageAccueil"></jsp:forward>
 </body>
 </html>
