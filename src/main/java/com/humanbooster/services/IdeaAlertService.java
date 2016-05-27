@@ -7,4 +7,8 @@ import com.humanbooster.business.IdeaAlert;
 public interface IdeaAlertService {
 
 	public List<IdeaAlert> findAllIdeaAlert();
+	
+	public IdeaAlert findIdeaAlertByIdIdea(int idIdea);
+	
+	public boolean deleteIdeaAlert(IdeaAlert ideaAlert);
 }

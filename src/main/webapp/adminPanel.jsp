@@ -19,7 +19,7 @@
 	</div>
 	
 	<div style="height: 50px; background-color: #AAA;">
-		<a href="admin/panel">
+		<a href="admin/gestionAlerte">
 			Gestion des alertes </a>
 		<c:if test="${alertsIdeaNumber != 0}">
 			<p>${alertsIdeaNumber} idea alert</p>

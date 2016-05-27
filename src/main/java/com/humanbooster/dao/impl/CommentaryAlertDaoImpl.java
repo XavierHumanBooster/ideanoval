@@ -90,4 +90,12 @@ public class CommentaryAlertDaoImpl implements CommentaryAlertDao {
 		}
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<CommentaryAlert> findAllCommentaryAlert() {
+		String queryString = "FROM CommentaryAlert c";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		return query.list();
+	}
+
 }

@@ -10,6 +10,7 @@ public interface CommentaryAlertDao {
 	public CommentaryAlert findCommentaryAlertById(int idCommentary);
 	public List<CommentaryAlert> findCommentaryAlertByIdUser(int idUser);
 	public List<CommentaryAlert> findCommentaryAlertByIdDate(Date date);
+	public List<CommentaryAlert> findAllCommentaryAlert();
 	public boolean updateCommentaryAlert(CommentaryAlert commentaryAlert);
 	public boolean deleteCommentaryAlert(CommentaryAlert commentaryAlert);
 }

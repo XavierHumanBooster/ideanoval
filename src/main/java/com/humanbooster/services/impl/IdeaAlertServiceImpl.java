@@ -22,4 +22,16 @@ public class IdeaAlertServiceImpl implements IdeaAlertService {
 		ideaAlerts = ideaAlertDao.findAllIdeaAlert();
 		return ideaAlerts;
 	}
+
+	@Override
+	public boolean deleteIdeaAlert(IdeaAlert ideaAlert) {
+		
+		return ideaAlertDao.deleteIdeaAlert(ideaAlert);
+	}
+
+	@Override
+	public IdeaAlert findIdeaAlertByIdIdea(int idIdea) {
+		
+		return ideaAlertDao.findIdeaAlertById(idIdea);
+	}
 }

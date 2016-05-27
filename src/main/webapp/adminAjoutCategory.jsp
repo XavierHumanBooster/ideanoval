@@ -32,10 +32,11 @@
 	<c:if test="${not empty errorMsg}">
 		<p>${errorMsg}</p>
 	</c:if>
-	<form:form action="gestionCategory" modelAttribute="category" method="post">
-		<form:input type="text" placeholder="Label Catégorie" path="labelCategory"
-			required="required" />
-		
+	<form:form action="gestionCategory" modelAttribute="category"
+		method="post">
+		<form:input type="text" placeholder="Label Catégorie"
+			path="labelCategory" required="required" />
+
 		<input type="submit" value="Ajouter la catégorie">
 	</form:form>
 </body>

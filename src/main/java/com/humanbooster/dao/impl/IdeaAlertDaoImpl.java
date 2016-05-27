@@ -41,10 +41,10 @@ public class IdeaAlertDaoImpl implements IdeaAlertDao {
 
 	@Override
 	@Transactional(readOnly = true)
-	public IdeaAlert findIdeaAlertById(int idIdeaAlert) {
-		String queryString = "FROM IdeaAlert i WHERE i.idIdeaAlert = :idIdeaAlert";
+	public IdeaAlert findIdeaAlertById(int idIdea) {
+		String queryString = "FROM IdeaAlert i WHERE i.evaluableIdea.idIdea = :idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
-		query.setInteger("idIdeaAlert", idIdeaAlert);
+		query.setInteger("idIdea", idIdea);
 		return (IdeaAlert) query.uniqueResult();
 	}
 
