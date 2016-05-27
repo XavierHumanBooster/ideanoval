@@ -7,13 +7,17 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.humanbooster.business.PK.CommentaryAlertPK;
+
 @Entity
-public class CommentaryAlert  implements Serializable{
+@IdClass(CommentaryAlertPK.class)
+public class CommentaryAlert implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

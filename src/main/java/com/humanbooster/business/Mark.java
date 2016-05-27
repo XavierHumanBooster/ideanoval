@@ -5,10 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.humanbooster.business.PK.MarkPK;
+
 @Entity
+@IdClass(MarkPK.class)
 public class Mark implements Serializable {
 
 	private static final long serialVersionUID = 1L;

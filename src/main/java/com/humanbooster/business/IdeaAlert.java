@@ -7,19 +7,23 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.humanbooster.business.PK.IdeaAlertPK;
+
 @Entity
+@IdClass(IdeaAlertPK.class)
 public class IdeaAlert implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 //======================
 //Attributs
-//======================
+//======================	
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "idIdea")
