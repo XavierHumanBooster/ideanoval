@@ -1,5 +1,7 @@
 package com.humanbooster.services.impl;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,18 @@ public class IdeaServiceImpl implements IdeaService {
 
 	@Override
 	public boolean addIdea(Idea idea) {
+		idea.setPublishDateIdea(Date.from(Instant.now()));
+		idea.setAvailableIdea(true);
 		if(id.saveIdea(idea)){
 			return true;
 		}else{
 		return false;
 		}
+	}
+
+	@Override
+	public List<Idea> findEnableIdea() {
+		return id.findEnableIdea();
 	}
 
 }

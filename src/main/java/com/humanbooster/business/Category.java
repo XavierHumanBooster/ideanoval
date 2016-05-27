@@ -55,7 +55,7 @@ public class Category implements Serializable {
 	public List<Idea> getIdeas() {
 		return ideas;
 	}
-
+	
 //======================
 //Setters
 //======================	
@@ -70,4 +70,16 @@ public class Category implements Serializable {
 	public void setIdeas(List<Idea> ideas) {
 		this.ideas = ideas;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [idCategory=" + idCategory + ", labelCategory=" + labelCategory +"]";
+	}
+
+	//======================
+	//To String
+	//======================	
+	
+	
+
 }

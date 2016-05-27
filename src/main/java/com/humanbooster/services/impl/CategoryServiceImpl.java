@@ -30,5 +30,11 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		return categoryDao.addCategory(category);
 	}
+
+	@Override
+	public Category getCategorybyId(int idCategory) {
+		return categoryDao.findCategoryById(idCategory);
+
+	}
 	
 }

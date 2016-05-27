@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,10 +19,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.humanbooster.business.Category;
 import com.humanbooster.business.EvaluableIdea;
+import com.humanbooster.business.Idea;
+import com.humanbooster.business.UserLambda;
+import com.humanbooster.services.CategoryService;
 import com.humanbooster.services.IdeaService;
+import com.humanbooster.services.UserService;
 
 @Controller
 public class IdeaController {
@@ -31,6 +38,14 @@ public class IdeaController {
 
 	@Autowired
 	private IdeaService ideaService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
+	private UserLambda userLambda;
 
 	// ======================
 	// Getter publish
@@ -39,8 +54,12 @@ public class IdeaController {
 	@RequestMapping(value = "/publish", method = RequestMethod.GET)
 	public ModelAndView accueilPublishIdea(Map<String, Object> map) {
 		map.put("evaluableIdea", new EvaluableIdea());
+		userLambda = (UserLambda) userService.findUserById((int) session.getAttribute("idUser"));
+		List<Category> listeCategory = categoryService.getAllCategory();
+		map.put("listeCategory", listeCategory);
 		return new ModelAndView("/idea", map);
 	}
+	
 
 	// ======================
 	// publishIdea post
@@ -48,7 +67,7 @@ public class IdeaController {
 
 	@RequestMapping(value = "/publishIdea", method = RequestMethod.POST)
 	public String Inscription(@ModelAttribute("evaluableIdea") EvaluableIdea evaluableIdea, BindingResult result,
-			Map<String, Object> map) {
+			@RequestParam Map<String, Object> map) {
 
 		System.out.println(evaluableIdea.toString());
 		
@@ -73,6 +92,15 @@ public class IdeaController {
 		
 		evaluableIdea.setPictureIdea(imageEnregistrer.getName());
 		}
+		
+		evaluableIdea.setUserLambda(userLambda);
+		
+		
+		Category category = categoryService.getCategorybyId(Integer.parseInt((String) map.get("category.idCategory")));
+		
+		evaluableIdea.setCategory(category);
+
+
 
 		if (ideaService.addIdea(evaluableIdea)) {
 			return "ideaOk";

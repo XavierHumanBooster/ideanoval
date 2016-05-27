@@ -12,4 +12,6 @@ public interface IdeaService {
 	
 	public List<Integer> getAllIdFromIdea();
 
+	public List<Idea> findEnableIdea();
+
 }
