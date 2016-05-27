@@ -1,3 +1,4 @@
 /target/
 target/m2e-wtp/web-resources/META-INF/maven/com.humanbooster/ideanoval/pom.properties
 target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+.settings/org.hibernate.eclipse.console.prefs

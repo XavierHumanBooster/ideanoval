@@ -23,7 +23,6 @@ public class CategoryServiceImpl implements CategoryService {
 		categories = categoryDao.getAllCategory();
 		return categories;
 		
-		
 	}
 
 	@Override
