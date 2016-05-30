@@ -1,10 +1,8 @@
 package com.humanbooster.services.impl;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
+
 import java.util.Date;
->>>>>>> origin/master
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,10 @@ import com.humanbooster.services.CommentaryAlertService;
 public class CommentaryAlertServiceImpl implements CommentaryAlertService {
 	
 	@Autowired
-<<<<<<< HEAD
 	CommentaryAlertDao commentaryAlertDao;
+	
+	public CommentaryAlertServiceImpl() {
+	}
 
 	@Override
 	public List<CommentaryAlert> findAllCommentaryAlert() {
@@ -32,10 +32,6 @@ public class CommentaryAlertServiceImpl implements CommentaryAlertService {
 	public boolean deleteCommentaryAlert(CommentaryAlert commentaryAlert) {
 		
 		return commentaryAlertDao.deleteCommentaryAlert(commentaryAlert);
-=======
-	private CommentaryAlertDao commentaryAlertDao;
-
-	public CommentaryAlertServiceImpl() {
 	}
 
 	@Override
@@ -48,7 +44,6 @@ public class CommentaryAlertServiceImpl implements CommentaryAlertService {
 		List<CommentaryAlert> commentaryAlerts = new ArrayList<>();
 		commentaryAlerts = commentaryAlertDao.findCommentaryAlertByIdDate(date);
 		return commentaryAlerts;
->>>>>>> origin/master
 	}
 
 }

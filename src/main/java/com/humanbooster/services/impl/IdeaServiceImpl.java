@@ -16,6 +16,8 @@ public class IdeaServiceImpl implements IdeaService {
 	
 	@Autowired
 	private IdeaDao id;
+	
+	public IdeaServiceImpl() {}
 
 	@Override
 	public Idea findIdeaById(int idIdea) {
@@ -23,6 +25,7 @@ public class IdeaServiceImpl implements IdeaService {
 		return idea;
 	}
 	
+	@Override
 	public List<Integer> getAllIdFromIdea(){
 		List<Integer> listeId = id.getAllIdFromIdea();
 		return listeId ;
@@ -41,14 +44,14 @@ public class IdeaServiceImpl implements IdeaService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public boolean updateIdea(Idea idea) {
 		
 		return id.updateIdea(idea);
-=======
+	}
+
+	@Override
 	public List<Idea> findEnableIdea() {
 		return id.findEnableIdea();
->>>>>>> origin/master
 	}
 
 }
