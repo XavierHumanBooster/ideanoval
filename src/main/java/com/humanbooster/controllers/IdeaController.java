@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.humanbooster.business.Category;
 import com.humanbooster.business.EvaluableIdea;
-import com.humanbooster.business.Idea;
+import com.humanbooster.business.Poll;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.services.CategoryService;
 import com.humanbooster.services.IdeaService;
@@ -46,27 +46,42 @@ public class IdeaController {
 	private CategoryService categoryService;
 	
 	private UserLambda userLambda;
+	
+	// ======================
+	// Post publishChoice
+	// ======================
+	
+	@RequestMapping(value = "/publishChoice", method = RequestMethod.POST)
+	public ModelAndView accueilPublish(@RequestParam Map<String, Object> map) {
+		if(map.get("choice").equals("idea")){
+			return accueilPublishIdea(map);
+		}else if(map.get("choice").equals("poll")){
+			return accueilPublishPoll(map);
+		}else{
+			return accueilPublish(map);
+		}
+		
+	}
 
 	// ======================
-	// Getter publish
+	// Getter publishIdea
 	// ======================
 
-	@RequestMapping(value = "/publish", method = RequestMethod.GET)
-	public ModelAndView accueilPublishIdea(Map<String, Object> map) {
+	@RequestMapping(value = "/publishIdea", method = RequestMethod.GET)
+	public ModelAndView accueilPublishIdea(@RequestParam Map<String, Object> map) {
 		map.put("evaluableIdea", new EvaluableIdea());
 		userLambda = (UserLambda) userService.findUserById((int) session.getAttribute("idUser"));
 		List<Category> listeCategory = categoryService.getAllCategory();
 		map.put("listeCategory", listeCategory);
-		return new ModelAndView("/idea", map);
+		return new ModelAndView("addIdea", map);
 	}
 	
-
 	// ======================
 	// publishIdea post
 	// ======================
 
 	@RequestMapping(value = "/publishIdea", method = RequestMethod.POST)
-	public String Inscription(@ModelAttribute("evaluableIdea") EvaluableIdea evaluableIdea, BindingResult result,
+	public String InscriptionIdea(@ModelAttribute("evaluableIdea") EvaluableIdea evaluableIdea, BindingResult result,
 			@RequestParam Map<String, Object> map) {
 
 		System.out.println(evaluableIdea.toString());
@@ -77,13 +92,12 @@ public class IdeaController {
 		int lastIndex = ideaService.getAllIdFromIdea().size();
 		String extension = getFileExtension(evaluableIdea.getImageUp().getName());
 		File imageEnregistrer = new File(
-				"C:\\Users\\hb\\Documents\\GitHub\\ideanoval\\image\\" + (lastIndex + 1) + "." + extension);
+				"C:\\Users\\hb\\Documents\\GitHub\\ideanoval\\src\\main\\webapp\\resources\\Images\\" + (lastIndex + 1) + "." + extension);
 		try {
 			imageEnregistrer.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		try {
 			copyFile(evaluableIdea.getImageUp(), imageEnregistrer);
 		} catch (IOException e) {
@@ -105,11 +119,105 @@ public class IdeaController {
 		if (ideaService.addIdea(evaluableIdea)) {
 			return "ideaOk";
 		} else {
-			return "idea";
+			return "addIdea";
 		}
 
 	}
 
+	// ======================
+	// Getter publishPoll
+	// ======================
+
+	@RequestMapping(value = "/publishPoll", method = RequestMethod.GET)
+	public ModelAndView accueilPublishPoll(@RequestParam Map<String, Object> map) {
+		map.put("poll", new Poll());
+		userLambda = (UserLambda) userService.findUserById((int) session.getAttribute("idUser"));
+		List<Category> listeCategory = categoryService.getAllCategory();
+		map.put("listeCategory", listeCategory);
+		return new ModelAndView("addPoll", map);
+	}
+	
+
+	// ======================
+	// publishIdea post
+	// ======================
+
+	@RequestMapping(value = "/publishPoll", method = RequestMethod.POST)
+	public ModelAndView InscriptionPoll(@ModelAttribute("poll") Poll poll, BindingResult result,
+			@RequestParam Map<String, Object> map) {
+
+		
+		if(!poll.getImageUp().exists()){
+		poll.setPictureIdea("default.jpg");
+		}else{
+		int lastIndex = ideaService.getAllIdFromIdea().size();
+		String extension = getFileExtension(poll.getImageUp().getName());
+		File imageEnregistrer = new File(
+				"C:\\Users\\hb\\Documents\\GitHub\\ideanoval\\src\\main\\webapp\\resources\\Images\\" + (lastIndex + 1) + "." + extension);
+		try {
+			imageEnregistrer.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			copyFile(poll.getImageUp(), imageEnregistrer);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		poll.setPictureIdea(imageEnregistrer.getName());
+		}
+		poll.setUserLambda(userLambda);
+		
+		
+		Category category = categoryService.getCategorybyId(Integer.parseInt((String) map.get("category.idCategory")));
+		
+		poll.setCategory(category);
+
+
+
+		if (ideaService.addIdea(poll)) {
+			map.put("idPoll", ideaService.findIdeaByTitle(poll.getTitleIdea()).getIdIdea());
+			return new ModelAndView("addOtherPoll", map);
+		} else {
+			return new ModelAndView("addPoll", map);
+
+		}
+
+	}
+	
+	// ======================
+	// Post publishPerso
+	// ======================
+	
+	@RequestMapping(value = "/publishPerso", method = RequestMethod.POST)
+	public ModelAndView accueilPerso(@RequestParam Map<String, Object> map) {
+		if(map.get("perso").equals("yes")){
+			return accueilPollWithPerso(map);
+		}else if(map.get("perso").equals("no")){
+			return accueilPollWithoutPerso(map);
+		}else{
+			return accueilPerso(map);
+		}
+	}
+		// ======================
+		// Get pollWithPerso
+		// ======================
+		@RequestMapping(value = "/pollWithPerso", method = RequestMethod.POST)
+		public ModelAndView accueilPollWithPerso(@RequestParam Map<String, Object> map) {
+			return new ModelAndView("addPollWithPersonal", map);
+		}
+	
+		// ======================
+		// Get pollWithoutPerso
+		// ======================
+		@RequestMapping(value = "/pollWithoutPerso", method = RequestMethod.POST)
+		public ModelAndView accueilPollWithoutPerso(@RequestParam Map<String, Object> map) {
+			return new ModelAndView("addPollWithoutPersonal", map);
+
+		}
+		
+	
 	public static String getFileExtension(String NomFichier) {
 		File tmpFichier = new File(NomFichier);
 		tmpFichier.getName();

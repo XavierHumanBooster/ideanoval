@@ -54,4 +54,10 @@ public class IdeaServiceImpl implements IdeaService {
 		return id.findEnableIdea();
 	}
 
+	@Override
+	public Idea findIdeaByTitle(String titleIdea) {
+		return id.findIdeaByTitle(titleIdea);
+
+	}
+
 }

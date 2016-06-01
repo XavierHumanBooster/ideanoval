@@ -16,9 +16,7 @@
 	<a href="register">Page d'inscription</a>
 	<br />
 	<br />
-	<a href="publish">Ajout d'une idée</a>
-	
-	<p>${listeSize}</p>
+	<a href="idea.jsp">Ajout d'une idée</a>
 
 	<table style="margin: 0px auto;">
 	

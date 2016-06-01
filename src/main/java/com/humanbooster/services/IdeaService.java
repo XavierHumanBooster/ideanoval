@@ -7,6 +7,8 @@ import com.humanbooster.business.Idea;
 public interface IdeaService {
 	
 	public Idea findIdeaById(int idIdea);
+	
+	public Idea findIdeaByTitle(String titleIdea);
 
 	public boolean addIdea(Idea idea);
 	
