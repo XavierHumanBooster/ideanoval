@@ -13,7 +13,6 @@
 
 	<H1>page index du site</H1>
 
-	<a href="register">Page d'inscription</a>
 	<br />
 	<br />
 	<a href="idea.jsp">Ajout d'une idée</a>

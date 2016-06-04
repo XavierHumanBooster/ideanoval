@@ -10,7 +10,10 @@
 <title>Add Poll</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 <h2>Publier un Sondage</h2>
+
+
 
 	<form:form action="publishPoll" modelAttribute="poll"
 		method="post">

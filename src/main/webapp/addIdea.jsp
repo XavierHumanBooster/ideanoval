@@ -10,6 +10,8 @@
 <title>Add Idea</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
+
 
 <h2>Publié une idée</h2>
 	<form:form action="publishIdea" modelAttribute="evaluableIdea"

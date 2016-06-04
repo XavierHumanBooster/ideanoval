@@ -10,6 +10,7 @@
 <title>Publish Idea</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 
 	<h4>Souhaitez vous publier :</h4>
 

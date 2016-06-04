@@ -8,6 +8,7 @@
 <title>Login/Inscription</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 
 <h2>Identification</h2>
 <form action="login" method="post">

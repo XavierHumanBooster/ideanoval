@@ -7,18 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<jsp:include page="header.jsp" />
 	<h2>Options de Sondage</h2>
 
 	
 
 
-	<form action="publishOptionPoll" method="post">
-		<input type="text" placeholder="Réponse 1" /><br /> <br /> <input
-			type="text" placeholder="Réponse 2" /><br /> <br /> <input
-			type="text" placeholder="Réponse 3" /><br /> <br /> <input
-			type="text" placeholder="Réponse 4" /><br /> <br /> <input
-			type="text" placeholder="Réponse 5" /><br /> <br /> <input
+	<form action="publishOptionPollWithoutPersonal" method="post">
+		<input type="text" name="rep1" placeholder="Réponse 1" /><br /> <br /> <input
+			type="text" name="rep2" placeholder="Réponse 2" /><br /> <br /> <input
+			type="text" name="rep3" placeholder="Réponse 3" /><br /> <br /> <input
+			type="text" name="rep4" placeholder="Réponse 4" /><br /> <br /> <input
+			type="text" name="rep5" placeholder="Réponse 5" /><br /> <br /> <input
 			type="submit" value="Envoyer"><br />
 	</form>
 

@@ -25,8 +25,8 @@
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#">Inscription</a></li>
-					<li><a href="#">Connexion</a></li>
+					<li><a href="register">Inscription</a></li>
+					<li><a href="register">Connexion</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
