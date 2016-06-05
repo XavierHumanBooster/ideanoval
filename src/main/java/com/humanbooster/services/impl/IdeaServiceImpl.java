@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.humanbooster.business.EvaluableIdea;
 import com.humanbooster.business.Idea;
 import com.humanbooster.dao.IdeaDao;
 import com.humanbooster.services.IdeaService;
@@ -58,6 +59,11 @@ public class IdeaServiceImpl implements IdeaService {
 	public Idea findIdeaByTitle(String titleIdea) {
 		return id.findIdeaByTitle(titleIdea);
 
+	}
+
+	@Override
+	public EvaluableIdea findEvaluableIdeaByID(int idIdea) {
+		return id.findEvaluableIdeaById(idIdea);
 	}
 
 }

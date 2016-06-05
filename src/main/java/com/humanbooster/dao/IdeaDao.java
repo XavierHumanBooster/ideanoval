@@ -3,6 +3,7 @@ package com.humanbooster.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.humanbooster.business.EvaluableIdea;
 import com.humanbooster.business.Idea;
 
 public interface IdeaDao {
@@ -19,4 +20,5 @@ public interface IdeaDao {
 	public List<Idea> findPollByEndPoll(Date date);
 	public boolean saveIdea(Idea idea);
 	List<Integer> getAllIdFromIdea();
+	public EvaluableIdea findEvaluableIdeaById(int idIdea);
 }

@@ -14,11 +14,11 @@ public class UserLambda extends User {
 //======================
 //Attributs
 //======================
-	private boolean ApprouvedUser;
+	private boolean approuvedUser;
 	
-	private boolean AvailableUser;
+	private boolean availableUser;
 	
-	private boolean DeletedUser;
+	private boolean deletedUser;
 	
 	@OneToMany(mappedBy = "userLambda", fetch = FetchType.LAZY)
 	private List<CommentaryAlert> commentariesAlert;
@@ -34,9 +34,9 @@ public class UserLambda extends User {
 //======================
 		
 	public UserLambda() {
-		this.ApprouvedUser = false;
-		this.AvailableUser = true;
-		this.DeletedUser = false;
+		this.approuvedUser = false;
+		this.availableUser = true;
+		this.deletedUser = false;
 	}
 	
 	
@@ -44,15 +44,15 @@ public class UserLambda extends User {
 //Getters
 //======================
 	public boolean isApprouvedUser() {
-		return ApprouvedUser;
+		return approuvedUser;
 	}
 
 	public boolean isAvailableUser() {
-		return AvailableUser;
+		return availableUser;
 	}
 
 	public boolean isDeletedUser() {
-		return DeletedUser;
+		return deletedUser;
 	}
 	
 	public List<CommentaryAlert> getCommentariesAlert() {
@@ -71,15 +71,15 @@ public class UserLambda extends User {
 //Setters
 //======================
 	public void setApprouvedUser(boolean approuvedUser) {
-		ApprouvedUser = approuvedUser;
+		this.approuvedUser = approuvedUser;
 	}
 
 	public void setAvailableUser(boolean availableUser) {
-		AvailableUser = availableUser;
+		this.availableUser = availableUser;
 	}
 
 	public void setDeletedUser(boolean deletedUser) {
-		DeletedUser = deletedUser;
+		this.deletedUser = deletedUser;
 	}
 
 	public void setCommentariesAlert(List<CommentaryAlert> commentariesAlert) {

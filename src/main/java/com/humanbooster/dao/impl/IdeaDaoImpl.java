@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.humanbooster.business.EvaluableIdea;
 import com.humanbooster.business.Idea;
 import com.humanbooster.dao.IdeaDao;
 
@@ -154,6 +155,16 @@ public class IdeaDaoImpl implements IdeaDao {
 		String queryString = "Select idIdea FROM Idea i ORDER BY idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public EvaluableIdea findEvaluableIdeaById(int idIdea) {
+		String queryString = "FROM Idea i WHERE i.idIdea = :idIdea AND DTYPE = :evaluableIdea";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		query.setInteger("idIdea", idIdea);
+		query.setString("evaluableIdea", "EvaluableIdea");
+		return (EvaluableIdea) query.uniqueResult();
 	}
 
 }
