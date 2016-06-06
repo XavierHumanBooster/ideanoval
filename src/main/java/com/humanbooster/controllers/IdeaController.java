@@ -1,13 +1,7 @@
 package com.humanbooster.controllers;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -24,11 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.humanbooster.business.Category;
 import com.humanbooster.business.EvaluableIdea;
-import com.humanbooster.business.Idea;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.services.CategoryService;
 import com.humanbooster.services.IdeaService;
 import com.humanbooster.services.UserService;
+import com.humanbooster.utils.Picture;
 
 @Controller
 public class IdeaController {
@@ -45,28 +39,48 @@ public class IdeaController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	private PollController pollController;
+	
 	private UserLambda userLambda;
+	
+
+	
+	// ======================
+	// Post publishChoice
+	// ======================
+	
+	@RequestMapping(value = "/publishChoice", method = RequestMethod.POST)
+	public ModelAndView accueilPublish(@RequestParam Map<String, Object> map) {
+		if(map.get("choice").equals("idea")){
+			return accueilPublishIdea(map);
+		}else if(map.get("choice").equals("poll")){
+			return pollController.accueilPublishPoll(map);
+		}else{
+			return accueilPublish(map);
+		}
+		
+	}
 
 	// ======================
-	// Getter publish
+	// Getter publishIdea
 	// ======================
 
-	@RequestMapping(value = "/publish", method = RequestMethod.GET)
-	public ModelAndView accueilPublishIdea(Map<String, Object> map) {
+	@RequestMapping(value = "/publishIdea", method = RequestMethod.GET)
+	public ModelAndView accueilPublishIdea(@RequestParam Map<String, Object> map) {
 		map.put("evaluableIdea", new EvaluableIdea());
 		userLambda = (UserLambda) userService.findUserById((int) session.getAttribute("idUser"));
 		List<Category> listeCategory = categoryService.getAllCategory();
 		map.put("listeCategory", listeCategory);
-		return new ModelAndView("/idea", map);
+		return new ModelAndView("addIdea", map);
 	}
 	
-
 	// ======================
 	// publishIdea post
 	// ======================
 
 	@RequestMapping(value = "/publishIdea", method = RequestMethod.POST)
-	public String Inscription(@ModelAttribute("evaluableIdea") EvaluableIdea evaluableIdea, BindingResult result,
+	public String InscriptionIdea(@ModelAttribute("evaluableIdea") EvaluableIdea evaluableIdea, BindingResult result,
 			@RequestParam Map<String, Object> map) {
 
 		System.out.println(evaluableIdea.toString());
@@ -75,17 +89,16 @@ public class IdeaController {
 		evaluableIdea.setPictureIdea("default.jpg");
 		}else{
 		int lastIndex = ideaService.getAllIdFromIdea().size();
-		String extension = getFileExtension(evaluableIdea.getImageUp().getName());
+		String extension = Picture.getFileExtension(evaluableIdea.getImageUp().getName());
 		File imageEnregistrer = new File(
-				"C:\\Users\\hb\\Documents\\GitHub\\ideanoval\\image\\" + (lastIndex + 1) + "." + extension);
+				"C:\\Users\\hb\\Documents\\GitHub\\ideanoval\\src\\main\\webapp\\resources\\Images\\" + (lastIndex + 1) + "." + extension);
 		try {
 			imageEnregistrer.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		try {
-			copyFile(evaluableIdea.getImageUp(), imageEnregistrer);
+			Picture.copyFile(evaluableIdea.getImageUp(), imageEnregistrer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,30 +118,9 @@ public class IdeaController {
 		if (ideaService.addIdea(evaluableIdea)) {
 			return "ideaOk";
 		} else {
-			return "idea";
+			return "addIdea";
 		}
 
 	}
 
-	public static String getFileExtension(String NomFichier) {
-		File tmpFichier = new File(NomFichier);
-		tmpFichier.getName();
-		int posPoint = tmpFichier.getName().lastIndexOf('.');
-		if (0 < posPoint && posPoint <= tmpFichier.getName().length() - 2) {
-			return tmpFichier.getName().substring(posPoint + 1);
-		}
-		return "";
-	}
-
-	public void copyFile(File src, File dest) throws IOException {
-		InputStream in = new BufferedInputStream(new FileInputStream(src));
-		OutputStream out = new BufferedOutputStream(new FileOutputStream(dest));
-		byte[] buf = new byte[4096];
-		int n;
-		while ((n = in.read(buf, 0, buf.length)) > 0)
-			out.write(buf, 0, n);
-
-		in.close();
-		out.close();
-	}
 }

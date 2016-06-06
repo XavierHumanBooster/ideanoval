@@ -9,5 +9,15 @@
 <body>
 	<jsp:include page="header.jsp" />
 
+
+<h4>Permettre des réponses personnalisés :</h4>
+
+	<form action="publishPerso" method="post">
+		<input type="radio" name="perso" value="yes">Oui </input> 
+		<input type="radio" name="perso" value="no">Non</input><br />
+		<input type="submit" value="Valider">
+	</form>
+
+
 </body>
 </html>

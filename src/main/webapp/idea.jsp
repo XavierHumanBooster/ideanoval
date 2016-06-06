@@ -10,55 +10,17 @@
 <title>Publish Idea</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 
 	<h4>Souhaitez vous publier :</h4>
 
-	<form>
-		<input type="radio" name="idea" value="idea">Idée <input
-			type="radio" name="poll" value="poll">Sondage<br />
-	</form>
-
-	<h2>Publié une idée</h2>
-	<form:form action="publishIdea" modelAttribute="evaluableIdea"
-		method="post">
-		<form:input type="text" placeholder="Titre" path="titleIdea"
-			required="required" />
-		<br />
-		<br />
-		<form:textarea type="text" placeholder="Description"
-			path="descriptionIdea" required="required" />
-		<br />
-		<br />
-		<select name="category.idCategory">
-            <option value="0" label="Selectionnez une catégorie"/>
-            <c:forEach items="${listeCategory}" var="category">
-                <option value="${category.idCategory}" label="${category.labelCategory}"/>
-            </c:forEach>
-        </select>
-		<form:input type="file" accept="image/x-png, image/gif, image/jpeg" path="imageUp" />
-		<!--<form:input type="hidden" path="pictureIdea" />-->
-		<br />
-		<br />
-		<input type="submit" value="Publier">
-		<br />
-	</form:form>
-
-	<h2>Options de Sondage</h2>
-
-	<form>
-		<INPUT type="checkbox" name="choix1" value="1">Permettre des
-		réponses personnalisés
+	<form action="publishChoice" method="post">
+		<input type="radio" name="choice" value="idea">Idée </input> 
+		<input type="radio" name="choice" value="poll">Sondage</input><br />
+		<input type="submit" value="Valider">
 	</form>
 
 
-	<form action="publishOptionPoll" method="post">
-		<input type="text" placeholder="Réponse 1" /><br />
-		<br /> <input type="text" placeholder="Réponse 2" /><br />
-		<br /> <input type="text" placeholder="Réponse 3" /><br />
-		<br /> <input type="text" placeholder="Réponse 4" /><br />
-		<br /> <input type="text" placeholder="Réponse 5" /><br />
-		<br /> <input type="submit" value="Envoyer"><br />
-	</form>
 
 </body>
 </html>

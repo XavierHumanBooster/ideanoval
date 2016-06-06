@@ -7,6 +7,7 @@
 <title>Confirmation ajout idée</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 <h1>Votre idée a été ajoutée avec succes ! </h1>
 </body>
 </html>

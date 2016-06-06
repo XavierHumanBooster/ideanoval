@@ -7,6 +7,7 @@
 <title>Inscription ok</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 <H1>Féliciation un mail a été envoyé à votre adresse pour confirmer votre inscription</H1>
 </body>
 </html>
