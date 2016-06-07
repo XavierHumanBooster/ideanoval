@@ -3,6 +3,7 @@ package com.humanbooster.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.humanbooster.business.EvaluableIdea;
 import com.humanbooster.business.Idea;
 
 public interface IdeaDao {

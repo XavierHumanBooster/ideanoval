@@ -1,6 +1,7 @@
 package com.humanbooster.services.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,16 @@ public class MarkServiceImpl implements MarkService {
 	@Override
 	public Mark getMarksByIdUserAndIdIdea(int idUser, int idIdea) {
 		return markDao.findMarkByIdUserAndIdIdea(idUser, idIdea);
+	}
+
+	@Override
+	public List<HashMap<Integer, Integer>> getIdIdea() {
+		return markDao.findIdIdea();
+	}
+
+	@Override
+	public List<Mark> getAllMark() {
+		return markDao.findAllMark();
 	}
 
 }

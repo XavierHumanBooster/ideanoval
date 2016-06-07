@@ -165,7 +165,7 @@ public class IdeaDaoImpl implements IdeaDao {
 		String queryString1 = "SELECT m.evaluableIdea.idIdea, SUM(m.valueMark) FROM Mark m GROUP BY m.evaluableIdea.idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString1);
 		List<Integer[]> list = query.list();
-		System.out.println(list.get(0)[1]);
+		//System.out.println(list.get(0)[1]);
 		return null;
 	};
 	

@@ -1,5 +1,7 @@
 package com.humanbooster.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -88,6 +90,27 @@ public class MarkDaoImpl implements MarkDao {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	@Transactional
+	public List<HashMap<Integer, Integer>> findIdIdea() {
+		String queryString = "SELECT m.evaluableIdea.idIdea, SUM(m.valueMark) FROM Mark m GROUP BY m.evaluableIdea.idIdea";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		query.setMaxResults(3);
+		List<HashMap<Integer, Integer>> listReturn = new ArrayList<>();
+		for(Object object : query.list()){
+			listReturn.add((HashMap<Integer, Integer>)object);
+		}
+		return listReturn;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Mark> findAllMark() {
+		String queryString = "FROM Mark m";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		return query.list();
 	}
 
 }

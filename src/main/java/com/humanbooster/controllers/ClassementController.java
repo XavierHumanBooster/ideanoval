@@ -1,5 +1,6 @@
 package com.humanbooster.controllers;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -42,7 +43,7 @@ public class ClassementController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView initClassementAndShowIt(Map<String, Object> map) {
 		ideaService.getTenBestIdea();
-	
+		System.out.println(markService.getAllMark());
 		return null;
 	}
 
