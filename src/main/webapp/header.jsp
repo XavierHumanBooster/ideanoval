@@ -10,7 +10,9 @@
 </head>
 <body>
 	<div id="wrapper-header">
-		<img alt="logo Ideanoval" src="/ideanoval/resources/Images/logo.png">
+		<a href="/ideanoval/index.jsp">
+			<img alt="logo Ideanoval" src="/ideanoval/resources/Images/logo.png">
+		</a>
 		<nav id="nav-menu-header">
 		<ul>
 			<li><a href="#">Idées aléatoires</a></li>
