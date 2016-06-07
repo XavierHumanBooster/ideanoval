@@ -11,7 +11,7 @@
 <body>
 	<div id="wrapper-header">
 		<a href="/ideanoval/index.jsp">
-			<img alt="logo Ideanoval" src="/ideanoval/resources/Images/logo.png">
+			<img alt="logo Ideanoval" src="/ideanoval/resources/Images/private/logo.png">
 		</a>
 		<nav id="nav-menu-header">
 		<ul>
