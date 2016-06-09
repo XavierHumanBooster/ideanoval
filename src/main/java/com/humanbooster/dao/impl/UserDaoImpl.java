@@ -180,7 +180,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@Transactional
 	public List<UserLambda> findUserIsApprouved() {
-		String queryString = "FROM User u WHERE u.ApprouvedUser = TRUE";
+		String queryString = "FROM User u WHERE u.approuvedUser = TRUE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
@@ -188,7 +188,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@Transactional
 	public List<UserLambda> findUserIsNotApprouved() {
-		String queryString = "FROM User u WHERE u.ApprouvedUser = FALSE";
+		String queryString = "FROM User u WHERE u.approuvedUser = FALSE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
@@ -196,7 +196,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@Transactional
 	public List<UserLambda> findUserIsAvailable() {
-		String queryString = "FROM User u WHERE u.AvailableUser = TRUE";
+		String queryString = "FROM User u WHERE u.availableUser = TRUE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
@@ -204,7 +204,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@Transactional
 	public List<UserLambda> findUserIsNotAvailable() {
-		String queryString = "FROM User u WHERE u.AvailableUser = FALSE";
+		String queryString = "FROM User u WHERE u.availableUser = FALSE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
@@ -212,7 +212,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@Transactional
 	public List<UserLambda> findUserIsDeleted() {
-		String queryString = "FROM User u WHERE u.DeletedUser = TRUE";
+		String queryString = "FROM User u WHERE u.deletedUser = TRUE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
@@ -220,7 +220,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@Transactional
 	public List<UserLambda> findUserIsNotDeleted() {
-		String queryString = "FROM User u WHERE u.DeletedUser = FALSE";
+		String queryString = "FROM User u WHERE u.deletedUser = FALSE";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
