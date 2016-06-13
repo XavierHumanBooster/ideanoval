@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import com.humanbooster.services.CommentaryService;
 import com.humanbooster.services.IdeaService;
 import com.humanbooster.services.MarkService;
 import com.humanbooster.services.UserService;
+import com.humanbooster.utils.ValueComparator;
 
 @Controller
 @RequestMapping(value = "/classement")
@@ -56,28 +58,21 @@ public class ClassementController {
 				hashMap.put(mark.getEvaluableIdea().getIdIdea(), mark.getValueMark());
 			}
 		}
-		Collections.sort(hashMap,new Comparator<HashMap<Integer, Integer>>() {
-
-			@Override
-			public int compare(HashMap<Integer, Integer> o1, HashMap<Integer, Integer> o2) {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-		});
-		System.out.println(hashMap);
-		return null;
+		hashMap.put(1, 20);
+		hashMap.put(4, 80);
+		hashMap.put(7, 2);
+		hashMap.put(10, 28);
+		hashMap.put(8, 15);
+		hashMap.put(0, 47);
+		ValueComparator comparateur = new ValueComparator(hashMap);
+		TreeMap<Integer,Integer> mapTriee = new TreeMap<Integer,Integer>(comparateur);
+		System.out.println("map non-triée: "+hashMap); //La commande suivante affichera map non-triée: {A=99.5, B=67.4, C=65.2}.
+		mapTriee.putAll(hashMap);
+		System.out.println("resultat du tri: "+mapTriee); //La commande suivante affichera résultat: {C=65.2, B=67.4, A=99.5}.
+		//System.out.println(hashMap);
 		
-		Collections.sort(array, new Comparator<String>()
-	    {
-	           public int compare(String o1, String o2)
-	           {
-	                  return tree2.get(o1).compareTo(tree2.get(o2));
-	            }
-	    });
-	 
-	    for (String cle : array) {
-	        System.out.println(cle + " : " + tree2.get(cle));
-	    }
+		mapTriee.get(arg0);
+		return null;
 	}
 
 }
