@@ -38,4 +38,9 @@ public class CommentaryServiceImpl implements CommentaryService {
 		return commentaries;
 	}
 
+	@Override
+	public List<Commentary> getAllCommentary() {
+		return commentaryDao.findAllCommentary();
+	}
+
 }

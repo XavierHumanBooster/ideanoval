@@ -11,4 +11,5 @@ public interface CommentaryDao {
 	public List<Commentary> findCommentaryByIdIdea(int idIdea);
 	public boolean updateCommentary(Commentary commentary);
 	public boolean deleteCommentary(Commentary commentary);
+	public List<Commentary> findAllCommentary();
 }

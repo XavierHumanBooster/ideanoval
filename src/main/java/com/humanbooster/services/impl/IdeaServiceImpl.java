@@ -71,4 +71,9 @@ public class IdeaServiceImpl implements IdeaService {
 		return id.findEvaluableIdeaById(idIdea);
 	}
 
+	@Override
+	public List<Idea> getAllIdea() {
+		return id.findAllIdea();
+	}
+
 }

@@ -186,4 +186,14 @@ public class IdeaDaoImpl implements IdeaDao {
 		return (EvaluableIdea) query.uniqueResult();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Idea> findAllIdea() {
+		String queryString = "FROM Idea i";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		return query.list();
+	}
+	
+	
+
 }

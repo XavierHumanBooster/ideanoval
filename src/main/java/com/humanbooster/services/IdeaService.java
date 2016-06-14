@@ -22,4 +22,6 @@ public interface IdeaService {
 	public List<Idea> findEnableIdea();
 	
 	public List<Idea> getTenBestIdea();
+	
+	public List<Idea> getAllIdea();
 }

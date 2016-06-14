@@ -23,4 +23,5 @@ public interface IdeaDao {
 	public List<Idea> findTenBestIdea();
 	public List<Idea> findTenCommentedIdea();
 	public EvaluableIdea findEvaluableIdeaById(int idIdea);
+	public List<Idea> findAllIdea();
 }
