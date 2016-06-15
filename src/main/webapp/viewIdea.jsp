@@ -13,7 +13,7 @@
 	<div class="idea-wrapper">
 		<img class="idea-picture" src="/ideanoval/resources/Images/default.jpg" alt="Illutration de l'idée">
 		<div class="idea-name">
-			<h2>Blablabla</h2>
+			<h2>Blablabla hkbg hk bhks nbskjfnbjks d,;fnsj ,;nsjdk b,sdjkb</h2>
 		</div>
 		<div class="idea-mark">
 			<a href="#"><img src="/ideanoval/resources/Images/private/ideaTopMark.png" alt="Top"></a>

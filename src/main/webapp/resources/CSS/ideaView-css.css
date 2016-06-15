@@ -24,14 +24,14 @@
 
 .idea-name {
 	box-sizing: border-box;
-	width: 100%;
+	width: calc(100% - 10px);
 	background: rgba(0,0,0,0.7);
 	padding-top: 2px;
 	padding-bottom: 2px;
 	padding-left: 8px;
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 5px;
+	left: 5px;
 	color: #FFF;
 }
 
