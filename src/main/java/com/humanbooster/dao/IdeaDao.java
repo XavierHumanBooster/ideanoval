@@ -13,6 +13,7 @@ public interface IdeaDao {
 	public List<Idea> findIdeaByIdCategory(int idCategory);
 	public List<Idea> findIdeaByIdUser(int idUser);
 	public List<Idea> findEnableIdea();
+	public List<Idea> findEnableIdeaReverse();
 	public List<Idea> findDisableIdea();
 	public boolean updateIdea(Idea idea);
 	public boolean deleteIdea(Idea idea);

@@ -59,7 +59,7 @@ public class CommentaryDaoImpl implements CommentaryDao {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Commentary> findCommentaryByIdIdea(int idIdea) {
-		String queryString = "FROM Commentary c WHERE c.idIdea = :idIdea";
+		String queryString = "FROM Commentary c WHERE c.evaluableIdea.idIdea = :idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		query.setInteger("idIdea", idIdea);
 		return query.list();

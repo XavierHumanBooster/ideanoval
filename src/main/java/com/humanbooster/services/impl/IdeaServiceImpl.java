@@ -66,4 +66,9 @@ public class IdeaServiceImpl implements IdeaService {
 		return id.findEvaluableIdeaById(idIdea);
 	}
 
+	@Override
+	public List<Idea> findEnableIdeaReverse() {
+		return id.findEnableIdeaReverse();
+	}
+
 }

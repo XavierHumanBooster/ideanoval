@@ -20,5 +20,7 @@ public interface IdeaService {
 	public boolean updateIdea(Idea idea);
 
 	public List<Idea> findEnableIdea();
+	
+	public List<Idea> findEnableIdeaReverse();
 
 }

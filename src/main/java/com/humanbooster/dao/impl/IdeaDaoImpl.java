@@ -167,4 +167,12 @@ public class IdeaDaoImpl implements IdeaDao {
 		return (EvaluableIdea) query.uniqueResult();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Idea> findEnableIdeaReverse() {
+		String queryString = "FROM Idea i WHERE i.availableIdea = TRUE ORDER BY publishDateIdea DESC";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		return query.list();
+	}
+
 }

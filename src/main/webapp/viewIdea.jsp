@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,39 +12,53 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	
+
 	<div class="idea-wrapper">
-		<img class="idea-picture" src="/ideanoval/resources/Images/default.jpg" alt="Illutration de l'idée">
+		<img class="idea-picture"
+			src="/ideanoval/resources/Images/default.jpg"
+			alt="Illutration de l'idée">
 		<div class="idea-name">
-			<h2>Blablabla</h2>
+			<h2>${idea.titleIdea}</h2>
 		</div>
 		<div class="idea-mark">
-			<a href="#"><img src="/ideanoval/resources/Images/private/ideaTopMark.png" alt="Top"></a>
-			<a href="#"><img src="/ideanoval/resources/Images/private/ideaFlopMark.png" alt="Flop"></a>
+			<a href="#"><img
+				src="/ideanoval/resources/Images/private/ideaTopMark.png" alt="Top"></a>
+			<a href="#"><img
+				src="/ideanoval/resources/Images/private/ideaFlopMark.png"
+				alt="Flop"></a>
 		</div>
 		<div class="idea-description">
-			<p>Description was here budsqhlgkhfqsudjfh uijez hsdmjf hmsjd qhdsj f,hmldskfj lzk hlkqh dsfmlkhjmflqsd,hf mjleqh nqls f,hqlkf hqsmldkfh klqsdjf kldsqjfkqdsfj kldsqfjklqsd fjqksdfj klqsdfj qdjsfhn kjqd,fhj kdqsfh jdsfh, qdslkfh qskldfjqlksdfjrogkjsqdo!kj:q kl</p>
+			<p>${idea.descriptionIdea}</p>
 		</div>
 		<div class="idea-author">
-			<h4>-- Puck</h4>
+			<h4>-- ${idea.userLambda.pseudoUser}</h4>
 		</div>
 	</div>
-		
+
 	<div class="idea-commentaries">
 		<h3>Commentaires :</h3>
-		<div class="idea-commentary">
-				<p>Valeur commentaire etryufig hj yguhbijskldf ikuifh iokfmujpom ilkezfm jezpiùjzeùipfhkzef oilkzh zeilhf zoilf hzolhzoeh uoz lhzolhf uf hufhm</p>
-				<h5>Auteur commentaire</h5>
-		</div>
-		<div class="idea-commentary">
-				<p>Valeur commentaire etryufig hj yguhbijskldf ikuifh iokfmujpom ilkezfm jezpiùjzeùipfhkzef oilkzh zeilhf zoilf hzolhzoeh uoz lhzolhf uf hufhm</p>
-				<h5>Auteur commentaire</h5>
-		</div>
-		<div class="idea-commentary">
-				<p>Valeur commentaire etryufig hj yguhbijskldf ikuifh iokfmujpom ilkezfm jezpiùjzeùipfhkzef oilkzh zeilhf zoilf hzolhzoeh uoz lhzolhf uf hufhm</p>
-				<h5>Auteur commentaire</h5>
-		</div>
+		<c:forEach items="${listeCommentary}" var="commentary">
+			<div class="idea-commentary">
+				<p>${commentary.valueCommentary}</p>
+				<h5>-- ${commentary.user.pseudoUser}</h5>
+			</div>
+		</c:forEach>
 	</div>
-	
+
+	<div class="idea-commentaries">
+		<h3>Ajouter un commentaire :</h3>
+
+		<form:form action="" modelAttribute="newCommentary" method="post">
+			<form:input type="textarea" placeholder="Commentaire : "
+				path="valueCommentary" required="required" />
+			<br />
+			<br />
+			<input type="submit" value="Commenter">
+			<br />
+		</form:form>
+	</div>
+
+
+
 </body>
 </html>
