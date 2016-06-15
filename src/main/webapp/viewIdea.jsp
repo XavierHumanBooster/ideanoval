@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Idea - TODO Nom de l'ideee</title>
+<title>Idea - ${idea.titleIdea}</title>
 <link href="/ideanoval/resources/CSS/ideaView-css.css" rel="stylesheet" />
 </head>
 <body>
