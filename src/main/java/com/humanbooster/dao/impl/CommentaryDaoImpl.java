@@ -89,4 +89,12 @@ public class CommentaryDaoImpl implements CommentaryDao {
 		}
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Commentary> findAllCommentary() {
+		String queryString = "FROM Commentary c";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		return query.list();
+	}
+
 }

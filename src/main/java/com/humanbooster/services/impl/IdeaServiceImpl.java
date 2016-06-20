@@ -54,6 +54,11 @@ public class IdeaServiceImpl implements IdeaService {
 	public List<Idea> findEnableIdea() {
 		return id.findEnableIdea();
 	}
+	
+	@Override
+	public List<Idea> getTenBestIdea(){
+		return id.findTenBestIdea();
+	}
 
 	@Override
 	public Idea findIdeaByTitle(String titleIdea) {
@@ -64,6 +69,11 @@ public class IdeaServiceImpl implements IdeaService {
 	@Override
 	public EvaluableIdea findEvaluableIdeaByID(int idIdea) {
 		return id.findEvaluableIdeaById(idIdea);
+	}
+
+	@Override
+	public List<Idea> getAllIdea() {
+		return id.findAllIdea();
 	}
 
 	@Override

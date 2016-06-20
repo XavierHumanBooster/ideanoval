@@ -3,6 +3,8 @@ package com.humanbooster.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -156,6 +158,23 @@ public class IdeaDaoImpl implements IdeaDao {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		return query.list();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Idea> findTenBestIdea(){
+		String queryString1 = "SELECT m.evaluableIdea.idIdea, SUM(m.valueMark) FROM Mark m GROUP BY m.evaluableIdea.idIdea";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString1);
+		List<Integer[]> list = query.list();
+		//System.out.println(list.get(0)[1]);
+		return null;
+	};
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Idea> findTenCommentedIdea(){
+		String queryString = "SELECT i.idIdea, COUNT(c.idCommentary) FROM idea i,commentary c WHERE i.idIdea = c.idIdea GROUP BY i.idIdea ";
+		return null;
+	};
 
 	@Override
 	@Transactional(readOnly = true)
@@ -167,6 +186,14 @@ public class IdeaDaoImpl implements IdeaDao {
 		return (EvaluableIdea) query.uniqueResult();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Idea> findAllIdea() {
+		String queryString = "FROM Idea i";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		return query.list();
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Idea> findEnableIdeaReverse() {

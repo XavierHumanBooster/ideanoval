@@ -20,6 +20,9 @@ public interface IdeaDao {
 	public List<Idea> findEvaluableIdeaByEndDate(Date endEvaluableIdea);
 	public List<Idea> findPollByEndPoll(Date date);
 	public boolean saveIdea(Idea idea);
-	List<Integer> getAllIdFromIdea();
+	public List<Integer> getAllIdFromIdea();
+	public List<Idea> findTenBestIdea();
+	public List<Idea> findTenCommentedIdea();
 	public EvaluableIdea findEvaluableIdeaById(int idIdea);
+	public List<Idea> findAllIdea();
 }
