@@ -28,12 +28,14 @@ import com.humanbooster.utils.ValueComparator;
 @RequestMapping(value = "/classement")
 public class ClassementController {
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private HttpSession session;
 
 	@Autowired
 	private IdeaService ideaService;
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private UserService userService;
 
@@ -44,7 +46,6 @@ public class ClassementController {
 	private CommentaryService commentaryService;
 
 	public ClassementController() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -61,21 +62,14 @@ public class ClassementController {
 				hashMap.replace(mark.getEvaluableIdea().getIdIdea(), hashMap.get(mark.getEvaluableIdea().getIdIdea()),
 						valur);
 			} else {
-				hashMap.put(mark.getEvaluableIdea().getIdIdea(), mark.getValueMark());
+				if(mark.getEvaluableIdea().isAvailableIdea()){
+					hashMap.put(mark.getEvaluableIdea().getIdIdea(), mark.getValueMark());
+				}
 			}
 		}
-		
-		// test
-		/*hashMap.put(1, 20);
-		hashMap.put(4, 80);
-		hashMap.put(7, 2);
-		hashMap.put(10, 28);
-		hashMap.put(8, 15);
-		hashMap.put(0, 47);*/
 
 		// on crée un objet ValueComparator qui va permettre de triée la hashMap
-		// par valeur
-		// du plus grande au plus petit
+		// par valeur du plus grande au plus petit
 		ValueComparator comparateur = new ValueComparator(hashMap);
 
 		// on recupere la hashMap triée avec un TreeMap
@@ -142,7 +136,9 @@ public class ClassementController {
 				hashMapCommentary.replace(commentary.getEvaluableIdea().getIdIdea(),
 						hashMapCommentary.get(commentary.getEvaluableIdea().getIdIdea()), valur);
 			} else {
-				hashMapCommentary.put(commentary.getEvaluableIdea().getIdIdea(), 0);
+				if(commentary.getEvaluableIdea().isAvailableIdea()){
+					hashMapCommentary.put(commentary.getEvaluableIdea().getIdIdea(), 0);
+				}
 			}
 		}
 
