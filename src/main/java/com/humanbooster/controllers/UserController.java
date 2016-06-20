@@ -1,5 +1,7 @@
 package com.humanbooster.controllers;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.humanbooster.business.Idea;
+import com.humanbooster.business.Mark;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.services.IdeaService;
+import com.humanbooster.services.MarkService;
 import com.humanbooster.services.UserService;
 import com.humanbooster.utils.SendMail;
 
@@ -31,6 +35,9 @@ public class UserController {
 	
 	@Autowired
 	private IdeaService ideaService;
+	
+	@Autowired
+	private MarkService markService;
 
 	// ======================
 	// Getter index page
@@ -41,11 +48,14 @@ public class UserController {
 		try{
 		UserLambda user = (UserLambda) userService.findUserById((int) session.getAttribute("idUser"));
 		map.put("pseudoUser", user.getPseudoUser());
+		List<Mark> listeMarkUser = markService.getMarksByIdUser((int) session.getAttribute("idUser"));
+		map.put("listeMarkUser", listeMarkUser);
 		}catch (NullPointerException e){
 			e.printStackTrace();
 		}
-		List<Idea> listeIdea = ideaService.findEnableIdea();
+		List<Idea> listeIdea = ideaService.findEnableIdeaReverse();
 		System.out.println(listeIdea.toString());
+		map.put("currentDate",Date.from(Instant.now()));
 		map.put("listeIdea", listeIdea);
 		map.put("listeSize", listeIdea.size());
 		System.out.println(listeIdea.size());

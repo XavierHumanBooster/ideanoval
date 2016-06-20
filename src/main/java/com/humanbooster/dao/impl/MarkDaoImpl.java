@@ -53,7 +53,7 @@ public class MarkDaoImpl implements MarkDao {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Mark> findMarkByIdIdea(int idIdea) {
-		String queryString = "FROM Mark m WHERE m.idIdea = :idIdea";
+		String queryString = "FROM Mark m WHERE m.evaluableIdea.idIdea = :idIdea";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		query.setInteger("idIdea", idIdea);
 		return query.list();
@@ -62,7 +62,7 @@ public class MarkDaoImpl implements MarkDao {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Mark> findMarkByIdUser(int idUser) {
-		String queryString = "FROM Mark m WHERE m.idUser = :idUser";
+		String queryString = "FROM Mark m WHERE m.user.idUser = :idUser";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
 		query.setInteger("idUser", idUser);
 		return query.list();

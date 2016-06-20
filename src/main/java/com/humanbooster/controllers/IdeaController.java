@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.humanbooster.business.Category;
+import com.humanbooster.business.Commentary;
 import com.humanbooster.business.EvaluableIdea;
+import com.humanbooster.business.Idea;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.services.CategoryService;
+import com.humanbooster.services.CommentaryService;
 import com.humanbooster.services.IdeaService;
 import com.humanbooster.services.UserService;
 import com.humanbooster.utils.Picture;
@@ -41,6 +44,9 @@ public class IdeaController {
 	
 	@Autowired
 	private PollController pollController;
+	
+	@Autowired
+	private CommentaryService commentaryService;
 	
 	private UserLambda userLambda;
 	
@@ -121,6 +127,32 @@ public class IdeaController {
 			return "addIdea";
 		}
 
+	}
+	
+	// ======================
+	// affichageIdea Get
+	// ======================
+
+	@RequestMapping(value = "/affichageIdea", method = RequestMethod.GET)
+	public ModelAndView affichageIdea(@RequestParam Map<String, Object> map) {
+		Commentary newCommentary = new Commentary();
+		Idea idea = ideaService.findIdeaById(Integer.parseInt((String) map.get("id")));
+		List<Commentary> listeCommentary = commentaryService.getCommentarysByIdIdea(idea.getIdIdea());
+		map.put("listeCommentary", listeCommentary);
+		map.put("idea", idea);
+		map.put("newCommentary", newCommentary);
+		return new ModelAndView("viewIdea", map);
+	}
+	
+	@RequestMapping(value="/affichageIdea", method = RequestMethod.POST)
+	public ModelAndView ajoutCommentaire(@ModelAttribute("newCommentary") Commentary commentary, BindingResult result,
+			@RequestParam Map<String, Object> map) {
+		commentary.setUser(userService.findUserById((int) session.getAttribute("idUser")));
+		commentary.setEvaluableIdea(ideaService.findEvaluableIdeaByID(Integer.parseInt((String) map.get("id")))); 
+		
+		commentaryService.addCommentary(commentary);
+			
+		return affichageIdea(map);
 	}
 
 }
