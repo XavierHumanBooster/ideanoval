@@ -22,6 +22,10 @@
 	padding: 2px 5px;
 }
 
+.idea-commentary.commentary-author {
+	background: #41B141;
+}
+
 .idea-name {
 	box-sizing: border-box;
 	width: calc(100% - 10px);
