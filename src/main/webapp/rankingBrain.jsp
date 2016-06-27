@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="wrapper">
-		<div class="idea-wrapper1">
+		<!-- <div class="idea-wrapper1">
 			<img class="idea-picture"
 				src="/ideanoval/resources/Images/default.jpg"
 				alt="Illutration de l'idée">
@@ -57,11 +57,22 @@
 				<p>Nombre idée :</p>
 			</div>
 
-		</div>
+		</div> -->
 
-		<c:forEach var="i" begin="4" end="10">
+		<c:forEach var="i" begin="0" end="9" varStatus="loop">
 
-			<div class="idea-wrapper">
+			<div
+				<c:choose>
+					<c:when test="${loop.index < 3}">
+						<c:if test="${loop.index == 0}"> class="idea-wrapper1"</c:if>
+						<c:if test="${loop.index == 1}"> class="idea-wrapper2"</c:if>
+						<c:if test="${loop.index == 2}"> class="idea-wrapper3"</c:if>
+					</c:when>
+					<c:otherwise>
+						class="idea-wrapper"
+					</c:otherwise>
+				</c:choose>
+			>
 				<img class="idea-picture"
 					src="/ideanoval/resources/Images/default.jpg"
 					alt="Illutration de l'idée">
