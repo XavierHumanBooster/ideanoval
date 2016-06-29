@@ -1,0 +1,18 @@
+#wrapper-addAnIdea {
+	width: 122px;
+	height: 172px;
+	background-image: url('../Images/private/logo_122_172.png');
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+
+#wrapper-addAnIdea:hover {
+	background-image: url('../Images/private/logo_hover_122_172.png');
+}
+
+.link-addAnIdea {
+	display: block;
+	width:100%;
+	height:100%;
+}

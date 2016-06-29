@@ -16,8 +16,7 @@
 		<nav id="nav-menu-header">
 		<ul>
 			<li><a href="#">Idées aléatoires</a></li>
-			<li><a href="#">Catégories</a></li>
-			<li><a href="#">Classements</a></li>
+			<li><a href="ranking.jsp">Classements</a></li>
 			<c:choose>
 				<c:when test="${sessionScope.idUser !=null}">
 					<li>
@@ -27,8 +26,7 @@
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="register">Inscription</a></li>
-					<li><a href="register">Connexion</a></li>
+					<li><a href="register">Inscription/Connexion</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

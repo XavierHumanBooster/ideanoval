@@ -11,12 +11,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-
-	<H1>page index du site</H1>
-
-	<br />
-	<br />
-	<a href="idea.jsp">Ajout d'une idée</a>
+	<jsp:include page="addAnIdea.jsp" />
 
 	<table style="margin: 0px auto;">
 

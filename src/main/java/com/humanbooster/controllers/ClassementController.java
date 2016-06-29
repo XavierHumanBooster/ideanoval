@@ -54,7 +54,7 @@ public class ClassementController {
 		// on recupere toutes les votes faites sur le site
 		List<Mark> listMark = markService.getAllMark();
 
-		// on fait la somme top, flop pour chaque idée
+		// on fait la somme top, flop pour chaque idï¿½e
 		HashMap<Integer, Integer> hashMap = new HashMap<>();
 		for (Mark mark : listMark) {
 			if (hashMap.containsKey(mark.getEvaluableIdea().getIdIdea())) {
@@ -68,32 +68,32 @@ public class ClassementController {
 			}
 		}
 
-		// on crée un objet ValueComparator qui va permettre de triée la hashMap
+		// on crï¿½e un objet ValueComparator qui va permettre de triï¿½e la hashMap
 		// par valeur du plus grande au plus petit
 		ValueComparator comparateur = new ValueComparator(hashMap);
 
-		// on recupere la hashMap triée avec un TreeMap
+		// on recupere la hashMap triï¿½e avec un TreeMap
 		TreeMap<Integer, Integer> mapTriee = new TreeMap<Integer, Integer>(comparateur);
-		System.out.println("map non-triée: " + hashMap); // La commande suivante
+		System.out.println("map non-triï¿½e: " + hashMap); // La commande suivante
 															// affichera map
-															// non-triée:
+															// non-triï¿½e:
 															// {A=99.5, B=67.4,
 															// C=65.2}.
 		mapTriee.putAll(hashMap);
 		System.out.println("resultat du tri: " + mapTriee); // La commande
 															// suivante
 															// affichera
-															// résultat:
+															// rï¿½sultat:
 															// {C=65.2, B=67.4,
 															// A=99.5}.
 
-		// on recupere que les 10 premières idIdea
+		// on recupere que les 10 premiï¿½res idIdea
 		Iterator<Integer> it = mapTriee.keySet().iterator();
 		int limite = 0;
 		List<Idea> listTenBestIdea = new ArrayList<>();
-		while (it.hasNext() && limite != 4) {
+		while (it.hasNext() && limite != 10) {
 			System.out.println(it.next());
-			// listTenBestIdea.add(ideaService.findIdeaById(it.next()));
+			listTenBestIdea.add(ideaService.findIdeaById(it.next()));
 			limite++;
 		}
 		// ------------------------------------------------------------------------------------------------------------------//
@@ -120,9 +120,9 @@ public class ClassementController {
 		Iterator<Integer> itIdea = mapTrieeIdea.keySet().iterator();
 		limite = 0;
 		List<Idea> listTenBestUser = new ArrayList<>();
-		while (itIdea.hasNext() && limite != 4) {
+		while (itIdea.hasNext() && limite != 10) {
 			System.out.println(itIdea.next());
-			// listTenBestUser.add(ideaService.findIdeaById(it.next()));
+			listTenBestUser.add(ideaService.findIdeaById(it.next()));
 			limite++;
 		}
 		// ------------------------------------------------------------------------------------------------------------------//
@@ -151,9 +151,9 @@ public class ClassementController {
 		Iterator<Integer> itCommentary = mapTrieeCommentary.keySet().iterator();
 		limite = 0;
 		List<Idea> listTenMostCommented = new ArrayList<>();
-		while (itCommentary.hasNext() && limite != 4) {
+		while (itCommentary.hasNext() && limite != 10) {
 			System.out.println(itCommentary.next());
-			// listTenMostCommented.add(ideaService.findIdeaById(itCommentary.next()));
+			listTenMostCommented.add(ideaService.findIdeaById(itCommentary.next()));
 			limite++;
 		}
 		
