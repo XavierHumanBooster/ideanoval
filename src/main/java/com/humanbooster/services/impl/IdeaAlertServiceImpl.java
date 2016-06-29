@@ -34,4 +34,9 @@ public class IdeaAlertServiceImpl implements IdeaAlertService {
 		
 		return ideaAlertDao.findIdeaAlertById(idIdea);
 	}
+
+	@Override
+	public boolean addIdeaAlert(IdeaAlert ideaAlert) {
+		return ideaAlertDao.addIdeaAlert(ideaAlert);
+	}
 }

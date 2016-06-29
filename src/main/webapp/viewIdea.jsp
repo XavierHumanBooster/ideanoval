@@ -21,15 +21,21 @@
 			<h2>${idea.titleIdea}</h2>
 		</div>
 		<div class="idea-mark">
-			<a href="#"><img
-				src="/ideanoval/resources/Images/private/ideaTopMark.png" alt="Top"></a>
-			<a href="#"><img
-				src="/ideanoval/resources/Images/private/ideaFlopMark.png"
-				alt="Flop"></a>
+			<c:choose>
+			<c:when test="${null != sessionScope.idUser}">	
+				<a href="#"><img src="/ideanoval/resources/Images/private/ideaTopMark.png" alt="Top"></a>
+				<a href="#"><img src="/ideanoval/resources/Images/private/ideaFlopMark.png" alt="Flop"></a>
+			</c:when>
+			<c:otherwise>
+				<div><p>TODO ratio</p></div>
+			</c:otherwise>
+			</c:choose>
 		</div>
+		
 		<div class="idea-description">
 			<p>${idea.descriptionIdea}</p>
 		</div>
+	
 		<div class="idea-author">
 			<h4>
 				<c:choose>
@@ -48,6 +54,12 @@
 					</c:otherwise>
 				</c:choose></h4>
 		</div>
+		<c:if test="${null != sessionScope.idUser && sessionScope.idUser != idea.userLambda.idUser}">
+			<div class="idea-alert">
+				<a href="affichageIdea/alertIdea?idea=${idea.idIdea}&user=${sessionScope.idUser}" title="Signaler l'idée">X</a>		
+			</div>
+		</c:if>
+		
 	</div>
 
 	<div class="idea-commentaries">
@@ -57,6 +69,11 @@
 			<div class="idea-commentary <c:if test="${commentary.user.idUser == idea.userLambda.idUser}">commentary-author</c:if>">
 				<p>${commentary.valueCommentary}</p>
 				<h5>-- ${commentary.user.pseudoUser}</h5>
+				<c:if test="${null != sessionScope.idUser && sessionScope.idUser != commentary.user.idUser}">
+					<div class="idea-commentary-alert">
+						<a href="affichageIdea/alertCommentary?commentary=${commentary.idCommentary}&user=${sessionScope.idUser}" title="Signaler le commentaire">!</a>		
+					</div>
+				</c:if>
 			</div>
 		</c:forEach>
 		

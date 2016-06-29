@@ -11,4 +11,6 @@ public interface IdeaAlertService {
 	public IdeaAlert findIdeaAlertByIdIdea(int idIdea);
 	
 	public boolean deleteIdeaAlert(IdeaAlert ideaAlert);
+	
+	public boolean addIdeaAlert(IdeaAlert ideaAlert);
 }

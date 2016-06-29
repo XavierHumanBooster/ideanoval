@@ -18,11 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.humanbooster.business.Category;
 import com.humanbooster.business.Commentary;
+import com.humanbooster.business.CommentaryAlert;
 import com.humanbooster.business.EvaluableIdea;
 import com.humanbooster.business.Idea;
+import com.humanbooster.business.IdeaAlert;
 import com.humanbooster.business.UserLambda;
 import com.humanbooster.services.CategoryService;
+import com.humanbooster.services.CommentaryAlertService;
 import com.humanbooster.services.CommentaryService;
+import com.humanbooster.services.IdeaAlertService;
 import com.humanbooster.services.IdeaService;
 import com.humanbooster.services.UserService;
 import com.humanbooster.utils.Picture;
@@ -47,6 +51,12 @@ public class IdeaController {
 	
 	@Autowired
 	private CommentaryService commentaryService;
+	
+	@Autowired
+	private IdeaAlertService ideaAlertService;
+	
+	@Autowired
+	private CommentaryAlertService commentaryAlertService;
 	
 	private UserLambda userLambda;
 	
@@ -152,6 +162,31 @@ public class IdeaController {
 		
 		commentaryService.addCommentary(commentary);
 			
+		return affichageIdea(map);
+	}
+	
+	@RequestMapping(value="/affichageIdea/alertIdea", method = RequestMethod.GET)
+	public ModelAndView alertIdea(@RequestParam Map<String, Object> map) {
+			EvaluableIdea evaluableIdea = ideaService.findEvaluableIdeaByID(Integer.parseInt((String) map.get("idea")));
+			UserLambda userLambda = userService.findUserById(Integer.parseInt((String) map.get("user")));
+			
+			IdeaAlert ideaAlert = new IdeaAlert(evaluableIdea, userLambda);
+			ideaAlertService.addIdeaAlert(ideaAlert);
+			
+		
+		map.put("id", String.valueOf(evaluableIdea.getIdIdea()));
+		return affichageIdea(map);
+	}
+	
+	@RequestMapping(value="/affichageIdea/alertCommentary", method = RequestMethod.GET)
+	public ModelAndView alertCommentary(@RequestParam Map<String, Object> map) {
+			Commentary commentary = commentaryService.findCommentaryById(Integer.parseInt((String) map.get("commentary")));
+			UserLambda userLambda = userService.findUserById(Integer.parseInt((String) map.get("user")));
+			
+			CommentaryAlert commentaryAlert = new CommentaryAlert(commentary, userLambda);
+			commentaryAlertService.addCommentaryAlert(commentaryAlert);
+			
+			map.put("id", String.valueOf(commentary.getEvaluableIdea().getIdIdea()));		
 		return affichageIdea(map);
 	}
 

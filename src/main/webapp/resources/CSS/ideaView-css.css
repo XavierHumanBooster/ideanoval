@@ -6,6 +6,26 @@
 	margin: auto;
 }
 
+.idea-alert, .idea-commentary-alert{
+	position: absolute;
+	top: 0;
+	right: -30px;
+	background-color: #ACBACB;
+	width: 30px;
+	text-align: center;
+}
+
+.idea-alert:hover, .idea-commentary-alert:hover{
+	background-color: #FF3232;
+}
+
+.idea-alert a, .idea-commentary-alert a {
+	width: 100%;
+	line-height: 30px;
+	text-decoration: none;
+	color: #000;
+}
+
 .idea-commentaries {
 	width: 400px;
 	margin: auto;
@@ -16,6 +36,7 @@
 }
 
 .idea-commentary {
+	position: relative;
 	margin-top: 3px;
 	background: gray;
 	width: 100%;
