@@ -16,9 +16,9 @@
 	</c:if>
 	<form:form action="admin" modelAttribute="administrator" method="post">
 		<form:input type="text" placeholder="Login" path="loginUser"
-			required="true" />
+			required="required" />
 		<form:input type="password" placeholder="Mot de passe"
-			path="passwordUser" required="true" />
+			path="passwordUser" required="required" />
 		<input type="submit" value="Connect" />
 	</form:form>
 </body>
