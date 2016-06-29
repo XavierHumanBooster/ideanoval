@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="wrapper-addAnIdea">
-	<a class="link-addAnIdea" href="Idea.jsp"></a>
+	<a class="link-addAnIdea" href="idea.jsp"></a>
 	</div>
 
 </body>
