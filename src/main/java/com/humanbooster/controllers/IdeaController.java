@@ -91,6 +91,26 @@ public class IdeaController {
 		return new ModelAndView("addIdea", map);
 	}
 	
+	
+	// ======================
+	// Getter randomIdea
+	// ======================
+
+	@RequestMapping(value = "/random", method = RequestMethod.GET)
+	public ModelAndView randomIdea(Map<String, Object> map) {
+		Commentary newCommentary = new Commentary();
+		Idea idea = ideaService.findIdeaRandom();
+		List<Commentary> listeCommentary = commentaryService.getCommentarysByIdIdea(idea.getIdIdea());
+		map.put("listeCommentary", listeCommentary);
+		map.put("idea", idea);
+		map.put("newCommentary", newCommentary);
+		
+		return new ModelAndView("viewIdea", map);
+	}
+	
+	
+	
+	
 	// ======================
 	// publishIdea post
 	// ======================

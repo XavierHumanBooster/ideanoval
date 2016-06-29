@@ -27,4 +27,6 @@ public interface IdeaService {
 
 	public List<Idea> findEnableIdeaReverse();
 
+	public Idea findIdeaRandom();
+
 }

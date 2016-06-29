@@ -81,4 +81,9 @@ public class IdeaServiceImpl implements IdeaService {
 		return id.findEnableIdeaReverse();
 	}
 
+	@Override
+	public Idea findIdeaRandom() {
+		return id.findRandomIdea();
+	}
+
 }

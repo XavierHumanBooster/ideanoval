@@ -9,9 +9,10 @@
 <link href="/ideanoval/resources/CSS/addAnIdea-css.css" rel="stylesheet" />
 </head>
 <body>
+<c:if test="${null!=sessionScope.idUser}">
 	<div id="wrapper-addAnIdea">
 	<a class="link-addAnIdea" href="idea.jsp"></a>
 	</div>
-
+</c:if>
 </body>
 </html>

@@ -15,15 +15,11 @@
 		</a>
 		<nav id="nav-menu-header">
 		<ul>
-			<li><a href="#">Idées aléatoires</a></li>
+			<li><a href="random">Idée aléatoire</a></li>
 			<li><a href="ranking.jsp">Classements</a></li>
 			<c:choose>
 				<c:when test="${sessionScope.idUser !=null}">
-					<li>
-						<p>Connecté en tant que ${sessionScope.pseudoUser}</p>
-						<button type="button" title="Déconnexion">Déconnexion</button>
-						<a href="#">Mon compte</a>
-					</li>
+					<li>Connecté en tant que ${sessionScope.pseudoUser}</li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="register">Inscription/Connexion</a></li>

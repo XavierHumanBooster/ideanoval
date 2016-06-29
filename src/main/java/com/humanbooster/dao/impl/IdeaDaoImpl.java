@@ -202,4 +202,13 @@ public class IdeaDaoImpl implements IdeaDao {
 		return query.list();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Idea findRandomIdea() {
+		String queryString = "From Idea i WHERE i.availableIdea = TRUE ORDER BY RAND()";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(queryString);
+		List<Idea> listIdea = query.list();
+		return (Idea) listIdea.get(0);
+	}
+
 }

@@ -71,6 +71,7 @@ public class UserController {
 		if (userService.connectUser((String) map.get("loginUser"), (String) map.get("passwordUser"))) {
 			UserLambda user = (UserLambda) userService.findUserByMail((String) map.get("loginUser"));
 			session.setAttribute("idUser", user.getIdUser());
+			session.setAttribute("pseudoUser", user.getPseudoUser());
 			return connexionIndex(map);
 		} else {
 			map.put("userLambda", new UserLambda());
