@@ -12,71 +12,103 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-<div class="wrapper">
-	<div class="idea-wrapper1">
-		<img class="idea-picture"
-			src="/ideanoval/resources/Images/default.jpg"
-			alt="Illutration de l'idée">
-		<div class="idea-name">
-			<h2>Tire de l'idee</h2>
-		</div>
-		<div class="idea-description">
-			<p>Le Lorem Ipsum est simplement de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
-		</div>
-			<div class="classement">
-			<p>Note : </p>
-		</div>
-	</div>
-
-	<div class="idea-wrapper2">
-		<img class="idea-picture"
-			src="/ideanoval/resources/Images/default.jpg"
-			alt="Illutration de l'idée">
-		<div class="idea-name">
-			<h2>Tire de l'idee</h2>
-		</div>
-		<div class="idea-description">
-			<p>Description de l'idee</p>
-		</div>
-			<div class="classement">
-			<p>Note : </p>
-		</div>
-	</div>
-
-	<div class="idea-wrapper3">
-		<img class="idea-picture"
-			src="/ideanoval/resources/Images/default.jpg"
-			alt="Illutration de l'idée">
-		<div class="idea-name">
-			<h2>Tire de l'idee</h2>
-		</div>
-		<div class="idea-description">
-			<p>Description de l'idee</p>
-		</div>
-			<div class="classement">
-			<p>Note : </p>
-		</div>
-
-	</div>
+	<div class="wrapper">
 	
-	<c:forEach var="i" begin="4" end="10">
-	
-		<div class="idea-wrapper">
-		<img class="idea-picture"
-			src="/ideanoval/resources/Images/default.jpg"
-			alt="Illutration de l'idée">
-		<div class="idea-name">
-			<h2>Tire de l'idee</h2>
-		</div>
-		<div class="idea-description">
-			<p>Description de l'idee</p>
-		</div>
-		<div class="classement">
-			<p>Note : </p>
+		<!--<div class="idea-wrapper1">
+			<img class="idea-picture"
+				src="/ideanoval/resources/Images/default.jpg"
+				alt="Illutration de l'idée">
+			<div class="idea-name">
+				<h2>Tire de l'idee</h2>
+			</div>
+			<div class="idea-description">
+				<p>Le Lorem Ipsum est simplement de texte pour réaliser un livre
+					spécimen de polices de texte. Il n'a pas fait que survivre cinq
+					siècles, mais s'est aussi dans des applications de mise en page de
+					texte, comme Aldus PageMaker.</p>
+			</div>
+			<div class="classement">
+				<p>Note :</p>
+			</div>
 		</div>
 
+		<div class="idea-wrapper2">
+			<img class="idea-picture"
+				src="/ideanoval/resources/Images/default.jpg"
+				alt="Illutration de l'idée">
+			<div class="idea-name">
+				<h2>Tire de l'idee</h2>
+			</div>
+			<div class="idea-description">
+				<p>Description de l'idee</p>
+			</div>
+			<div class="classement">
+				<p>Note :</p>
+			</div>
+		</div>
+
+		<div class="idea-wrapper3">
+			<img class="idea-picture"
+				src="/ideanoval/resources/Images/default.jpg"
+				alt="Illutration de l'idée">
+			<div class="idea-name">
+				<h2>Tire de l'idee</h2>
+			</div>
+			<div class="idea-description">
+				<p>Description de l'idee</p>
+			</div>
+			<div class="classement">
+				<p>Note :</p>
+			</div>
+
+		</div>
+
+		<c:forEach var="i" begin="4" end="10">
+
+			<div class="idea-wrapper">
+				<img class="idea-picture"
+					src="/ideanoval/resources/Images/default.jpg"
+					alt="Illutration de l'idée">
+				<div class="idea-name">
+					<h2>Tire de l'idee</h2>
+				</div>
+				<div class="idea-description">
+					<p>Description de l'idee</p>
+				</div>
+				<div class="classement">
+					<p>Note :</p>
+				</div>
+
+			</div>
+		</c:forEach>-->
+		
+		<c:forEach items="${ListIdea}" var="idea" varStatus="loop">
+			<div
+				<c:choose>
+					<c:when test="${loop.index < 3}">
+						<c:if test="${loop.index == 0}"> class="idea-wrapper1"</c:if>
+						<c:if test="${loop.index == 1}"> class="idea-wrapper2"</c:if>
+						<c:if test="${loop.index == 2}"> class="idea-wrapper3"</c:if>
+					</c:when>
+					<c:otherwise>
+						class="idea-wrapper"
+					</c:otherwise>
+				</c:choose>>
+				<img class="idea-picture"
+					src="/ideanoval/resources/Images/default.jpg"
+					alt="Illutration de l'idée">
+				<div class="idea-name">
+					<h2>${idea.titleIdea}</h2>
+				</div>
+				<div class="idea-description">
+					<p>${idea.descriptionIdea}</p>
+				</div>
+				<div class="classement">
+					<p>Note : ${map.get(idea.idIdea)}</p>
+				</div>
+			</div>
+		</c:forEach>
+		
 	</div>
-	</c:forEach>
-	</div>	
 </body>
 </html>

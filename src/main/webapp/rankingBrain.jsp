@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Classement</title>
+<title>Classement brain</title>
 <link href="/ideanoval/resources/CSS/ranking-css.css" rel="stylesheet" />
 </head>
 <body>
@@ -59,7 +59,7 @@
 
 		</div> -->
 
-		<c:forEach var="i" begin="0" end="9" varStatus="loop">
+		<c:forEach items="${ListUser}" var="user" varStatus="loop">
 
 			<div
 				<c:choose>
@@ -77,13 +77,13 @@
 					src="/ideanoval/resources/Images/default.jpg"
 					alt="Illutration de l'idée">
 				<div class="idea-name">
-					<h2>Nom de L'utilisateur</h2>
+					<h2>${user.pseudoUser}</h2>
 				</div>
 				<div class="idea-description">
-					<p>email utilisateur</p>
+					<p>${user.loginUser}</p>
 				</div>
 				<div class="classement">
-					<p>Nombre idée :</p>
+					<p>Nombre d'idée : ${map.get(user.idUser)}</p>
 				</div>
 			</div>
 		</c:forEach>
