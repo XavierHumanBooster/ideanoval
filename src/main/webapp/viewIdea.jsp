@@ -31,18 +31,35 @@
 			<p>${idea.descriptionIdea}</p>
 		</div>
 		<div class="idea-author">
-			<h4>-- ${idea.userLambda.pseudoUser}</h4>
+			<h4>
+				<c:choose>
+					<c:when test="${idea.userLambda.availableUser}">
+						-- ${idea.userLambda.pseudoUser}
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${idea.userLambda.deletedUser}">
+								-- Utilisateur supprimé
+							</c:when>
+							<c:otherwise>
+								-- Utilisateur désactivé
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose></h4>
 		</div>
 	</div>
 
 	<div class="idea-commentaries">
 		<h3>Commentaires :</h3>
 		<c:forEach items="${listeCommentary}" var="commentary">
-			<div class="idea-commentary">
+			
+			<div class="idea-commentary <c:if test="${commentary.user.idUser == idea.userLambda.idUser}">commentary-author</c:if>">
 				<p>${commentary.valueCommentary}</p>
 				<h5>-- ${commentary.user.pseudoUser}</h5>
 			</div>
 		</c:forEach>
+		
 	</div>
 
 	<div class="idea-commentaries">
