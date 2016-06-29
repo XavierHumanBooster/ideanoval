@@ -14,7 +14,7 @@
 <form action="login" method="post">
 <input type="text" placeholder="E-mail" name="loginUser" required="required"/><br/><br/>
 <input type="password" placeholder="Mot de passe" name="passwordUser" required="required"/><br/><br/>
-<input type="submit" value="Intentification"><br/>
+<input type="submit" value="Connexion"><br/>
 </form>
 
 <br/><br/>
